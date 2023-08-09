@@ -3,6 +3,7 @@ import * as native from 'natives';
 import { systems } from '../../systems';
 import { CSelectionEvents } from '../../../../shared/enums/events/webviewEvents';
 import { CREATOR_CORDS, CREATOR_HEADING } from '../../../../shared/config';
+import { DefaultEvents } from '../../../../shared/enums/events/defaultEvents';
 
 const webview = systems.webview.getInstance();
 const player = alt.Player.local;
@@ -49,9 +50,7 @@ async function handlePlay(id: string) {
 
     native.freezeEntityPosition(player, false);
     native.doScreenFadeIn(1000);
-    systems.screens.chat.init();
-    systems.screens.inventory.init();
-    systems.screens.speedometer.init();
+    alt.emit(DefaultEvents.playerSpawn);
 }
 
 function handleServerFetch(data: string, charactersAllowed: number) {
