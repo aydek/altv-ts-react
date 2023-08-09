@@ -13,4 +13,4 @@ cache/
 crashdumps/
 package-lock.json
 ipc.txt
-.server-crashes-cache
+.server-crashes-cache/
