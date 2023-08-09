@@ -1,0 +1,31 @@
+export const inventoryItems = [
+    { id: 0, category: 'equipment', img: 'shoes', name: 'Shoes', weight: 0.1 },
+    { id: 1, category: 'equipment', img: 'pants', name: 'Legs', weight: 0.1 },
+    { id: 2, category: 'equipment', img: 'tops', name: 'Top', weight: 0.1 },
+    { id: 3, category: 'equipment', img: 'glasses', name: 'Glasses', weight: 0.1 },
+    { id: 4, category: 'equipment', img: 'hats', name: 'Hat', weight: 0.1 },
+    { id: 5, category: 'equipment', img: 'ties', name: 'Neckwear', weight: 0.1 },
+    { id: 6, category: 'equipment', img: 'ears', name: 'Earrings', weight: 0.1 },
+    { id: 7, category: 'equipment', img: 'bracelets', name: 'Bracelet', weight: 0.1 },
+    { id: 8, category: 'equipment', img: 'masks', name: 'Mask', weight: 0.1 },
+    { id: 9, category: 'equipment', img: 'watches', name: 'Watch', weight: 0.1 },
+    { id: 10, category: 'equipment', img: 'bags', name: 'Bag', weight: 0.1 },
+    { id: 11, category: 'equipment', img: 'armours', name: 'Armour vest', weight: 2 },
+    { id: 12, category: 'general', img: 'phone', name: 'Mobile phone', weight: 0.1 },
+];
+
+export const equipmentItems = {
+    shoes: 0,
+    legs: 1,
+    top: 2,
+    glasses: 3,
+    hat: 4,
+    accessory: 5,
+    ears: 6,
+    bracelet: 7,
+    mask: 8,
+    watch: 9,
+    bag: 10,
+    armour: 11,
+    phone: 12,
+};

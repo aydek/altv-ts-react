@@ -1,0 +1,13 @@
+import './init/init';
+import './events/defaultEvents';
+import './systems/player/animations/events';
+import './systems/screens/chat/events';
+import './systems/screens/login/events';
+import './systems/screens/charSelect/events';
+import './systems/screens/charCreator/events';
+import './systems/screens/inventory/events';
+import './systems/screens/notifications/events';
+import './systems/screens/speedometer/interval';
+import './systems/timeweather/events';
+import './commands/events';
+import './utility/noclip/events';
