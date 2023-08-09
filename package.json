@@ -9,7 +9,10 @@
         "dev": "node ./scripts/watch.js",
         "dev:ui": "npx vite ./src-webviews --clearScreen=false --host=localhost --port=3000",
         "build:ui": "npx vite build ./src-webviews",
-        "update": "altv-pkg d rc"
+        "update": "altv-pkg d rc",
+        "watch-server": "node --es-module-specifier-resolution=node watch-server.js",
+        "watch-client": "node --es-module-specifier-resolution=node watch-client.js",
+        "watch": "concurrently npm:watch-*"
     },
     "author": "aydek",
     "license": "ISC",
@@ -48,6 +51,8 @@
     "type": "module",
     "dependencies": {
         "@dnd-kit/core": "^6.0.8",
+        "altv-esbuild": "^0.4.12",
+        "concurrently": "^8.2.0",
         "mongoose": "^7.4.1",
         "vite": "^4.3.1"
     },
