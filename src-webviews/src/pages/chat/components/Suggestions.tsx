@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { DummySuggestions } from '../dummyData';
-import { ChatEvents } from '../../../../../src/core/shared/enums/events/webviewEvents';
+import { ChatEvents } from '../../../../../src/shared/enums/events/webviewEvents';
 
 const Suggestions = ({
     input,

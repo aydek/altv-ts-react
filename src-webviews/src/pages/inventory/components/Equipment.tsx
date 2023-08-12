@@ -3,7 +3,7 @@ import { translate } from '../../../config';
 import { defaultEquipment } from '../dummyData';
 import { Droppable } from './DragnDrop';
 import { TrashCanIcon } from '../../../components/SVG';
-import { InventoryEvents } from '../../../../../src/core/shared/enums/events/webviewEvents';
+import { InventoryEvents } from '@events';
 
 interface IProps {
     equipment: typeof defaultEquipment;

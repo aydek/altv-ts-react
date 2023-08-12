@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 export function highlightWords(text: string): JSX.Element {
     const matches: { found: string; index: number }[] = [];

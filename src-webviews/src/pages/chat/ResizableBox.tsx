@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import Container from '../../components/Container';
 import { ResizeIcon } from '../../components/SVG';
 import { twMerge } from 'tailwind-merge';
-import { ChatEvents } from '../../../../src/core/shared/enums/events/webviewEvents';
+import { ChatEvents } from '../../../../src/shared/enums/events/webviewEvents';
 
 const SIZE_CONFIG = {
     x: 600,

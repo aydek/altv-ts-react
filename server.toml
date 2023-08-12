@@ -17,6 +17,8 @@ resources = [
     'core' 
 ]
 
+source-maps = true
+
 # Turn this off in production mode
 debug = true
 

@@ -4,7 +4,7 @@ import { Draggable, Droppable } from './DragnDrop';
 import LinearProgress from '../../../components/LinearProgress';
 import { locales } from '../../../locales';
 import Container from '../../../components/Container';
-import { InventoryEvents } from '../../../../../src/core/shared/enums/events/webviewEvents';
+import { InventoryEvents } from '@events';
 
 interface IProps {
     secondaryCapacity: number;
@@ -24,7 +24,8 @@ export const Secondary = ({
 }: IProps) => {
     const handleRightClick = (index: number) => () => {
         if ('alt' in window) {
-            alt.emit(InventoryEvents.itemPickup, index, JSON.stringify(secondaryItems), -1, ctrlHold);
+            if (ctrlHold) alt.emit(InventoryEvents.splitSecondary, index, undefined, JSON.stringify(secondaryItems));
+            else alt.emit(InventoryEvents.dropSecondary, index, undefined, JSON.stringify(secondaryItems));
         }
     };
 

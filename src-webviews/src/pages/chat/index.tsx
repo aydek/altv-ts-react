@@ -5,7 +5,7 @@ import InputBox, { ALLOWED_CHARS } from './components/InputBox';
 import Suggestions from './components/Suggestions';
 import { highlightWords } from './utils';
 import { DummyMessages } from './dummyData';
-import { ChatEvents } from '../../../../src/core/shared/enums/events/webviewEvents';
+import { ChatEvents } from '../../../../src/shared/enums/events/webviewEvents';
 
 const BUFFER_SIZE = 64;
 const LAST_MESSAGE_BUFFER_SIZE = 10;

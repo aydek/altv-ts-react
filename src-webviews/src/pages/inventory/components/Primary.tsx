@@ -5,7 +5,8 @@ import { Instructions } from './Instructions';
 import Divider from '../../../components/Divider';
 import LinearProgress from '../../../components/LinearProgress';
 import Container from '../../../components/Container';
-import { InventoryEvents } from '../../../../../src/core/shared/enums/events/webviewEvents';
+import { InventoryEvents } from '@events';
+
 
 interface IProps {
     capacity: number;
@@ -31,7 +32,8 @@ export const Primary = ({ capacity, items, itemsConfig, drag, secondaryItems, ct
 
     const handleRightClick = (index: number) => () => {
         if ('alt' in window) {
-            alt.emit(InventoryEvents.itemDrop, index, JSON.stringify(secondaryItems), -1, ctrlHold);
+            if(ctrlHold) alt.emit(InventoryEvents.splitPrimary, index);
+            else alt.emit(InventoryEvents.dropPrimary, index, undefined);
         }
     };
 

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { LANG } from '../../../../src/core/shared/locales/language';
+import { LANG } from '../../../../src/shared/locales/language';
 import { FuelIcon, LightsIcon, SeatBeltIcon } from '../../components/SVG';
 import { twMerge } from 'tailwind-merge';
 import LinearProgress from '../../components/LinearProgress';
-import { SpeedometerEvents } from '../../../../src/core/shared/enums/events/webviewEvents';
+import { SpeedometerEvents } from '../../../../src/shared/enums/events/webviewEvents';
 
 const rpmLines = 35;
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { InventoryEvents } from '../../../../../src/core/shared/enums/events/webviewEvents';
 import Container from '../../../components/Container';
+import { InventoryEvents } from '@events';
 
 interface IProps {
     items: Array<{ id: number; quantity: number; description: string }>;

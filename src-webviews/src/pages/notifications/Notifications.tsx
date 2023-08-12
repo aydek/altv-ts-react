@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Container from '../../components/Container';
 import { twMerge } from 'tailwind-merge';
 import { BellIcon, ErrorIcon, InfoIcon, SuccessIcon, WarningIcon } from '../../components/SVG';
-import { NotificationEvents } from '../../../../src/core/shared/enums/events/webviewEvents';
+import { NotificationEvents } from '../../../../src/shared/enums/events/webviewEvents';
 
 interface IState {
     type: string;

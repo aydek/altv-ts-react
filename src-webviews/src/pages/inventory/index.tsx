@@ -4,8 +4,8 @@ import { Primary } from './components/Primary';
 import { DndContext, DragEndEvent, DragStartEvent } from '@dnd-kit/core';
 import { Secondary } from './components/Secondary';
 import { Equipment } from './components/Equipment';
-import { InventoryEvents } from '../../../../src/core/shared/enums/events/webviewEvents';
 import { QuickAccess } from './components/QuickAccess';
+import { InventoryEvents } from '@events';
 
 const Inventory = () => {
     const [active, setActive] = useState(!('alt' in window));
@@ -42,24 +42,6 @@ const Inventory = () => {
             document.removeEventListener('keyup', handleKeyUp);
         };
     }, []);
-
-    useEffect(() => {
-        if (secondaryItems.length < 48) {
-            let array = [];
-            for (let i = 0; i < 48 - secondaryItems.length; i++) {
-                array.push({ id: -1, quantity: 0, description: '' });
-            }
-            setSecondaryItems([...secondaryItems, ...array]);
-        }
-
-        if (items.length < 48) {
-            let array = [];
-            for (let i = 0; i < 48 - items.length; i++) {
-                array.push({ id: -1, quantity: 0, description: '' });
-            }
-            setItems([...items, ...array]);
-        }
-    }, [items, secondaryItems]);
 
     const fetchPrimary = (items: string, capacity: number, equipment: string, firstrun: boolean) => {
         setItems(JSON.parse(items));
@@ -143,9 +125,10 @@ const Inventory = () => {
             if ('alt' in window) {
                 alt.emit(InventoryEvents.useItem, cDrag);
             }
+
             return;
         }
-        if (target.includes('destroy_item')) {
+        if (target.includes('destroy_item') && drag.type === 'primary_item') {
             const cDrag = drag.id;
             if (cDrag === null) return;
             const qty = 1;
@@ -160,9 +143,10 @@ const Inventory = () => {
             drag.id === parseInt(target.slice(target.indexOf(':') + 1, target.length)) &&
             ctrlHold
         ) {
+            /**  Stack Primary */
             if ('alt' in window) {
                 const index = drag.id;
-                alt.emit(InventoryEvents.itemDrop, index, JSON.stringify(secondaryItems), -1, false, true);
+                alt.emit(InventoryEvents.stackPrimary, index);
             }
             return;
         }
@@ -172,43 +156,51 @@ const Inventory = () => {
             drag.id === parseInt(target.slice(target.indexOf(':') + 1, target.length)) &&
             ctrlHold
         ) {
+            /**  Stack Secondary */
             if ('alt' in window) {
                 const index = drag.id;
-                alt.emit(InventoryEvents.itemPickup, index, JSON.stringify(secondaryItems), -1, false, true);
+                alt.emit(InventoryEvents.stackSecondary, index, JSON.stringify(secondaryItems));
             }
             return;
         }
         if (target.includes('primary_item') && drag.type === 'secondary_item') {
+            /** Drag from secondary to primary */
             if ('alt' in window) {
                 const index = drag.id;
                 const targetIndex = parseInt(target.slice(target.indexOf(':') + 1, target.length));
-                alt.emit(InventoryEvents.itemPickup, index, JSON.stringify(secondaryItems), targetIndex, ctrlHold);
+                alt.emit(InventoryEvents.dropSecondary, index, targetIndex, JSON.stringify(secondaryItems));
             }
             return;
         }
         if (target.includes('secondary_item') && drag.type === 'primary_item') {
+            /** Drag from primary to secondary */
             if ('alt' in window) {
                 const index = drag.id;
                 const targetIndex = parseInt(target.slice(target.indexOf(':') + 1, target.length));
-                alt.emit(InventoryEvents.itemDrop, index, JSON.stringify(secondaryItems), targetIndex, ctrlHold);
+                alt.emit(InventoryEvents.dropPrimary, index, targetIndex);
             }
             return;
         }
         if (drag.type === 'primary_item' && target.includes('primary_item')) {
+            /** Drag primary to primary */
             if ('alt' in window) {
                 const index = drag.id;
                 const targetIndex = parseInt(target.slice(target.indexOf(':') + 1, target.length));
                 if (index == targetIndex) return;
-                alt.emit(InventoryEvents.movePrimary, index, targetIndex, ctrlHold);
+                if (ctrlHold) alt.emit(InventoryEvents.splitPrimary, index, targetIndex);
+                else alt.emit(InventoryEvents.movePrimary, index, targetIndex);
             }
             return;
         }
+
         if (drag.type === 'secondary_item' && target.includes('secondary_item')) {
+            /** Drag secondary to secondary */
             if ('alt' in window) {
                 const index = drag.id;
                 const targetIndex = parseInt(target.slice(target.indexOf(':') + 1, target.length));
                 if (index == targetIndex) return;
-                alt.emit(InventoryEvents.moveSecondary, index, JSON.stringify(secondaryItems), targetIndex, ctrlHold);
+                if (ctrlHold) alt.emit(InventoryEvents.splitSecondary, index, targetIndex, undefined);
+                else alt.emit(InventoryEvents.moveSecondary, index, targetIndex);
             }
             return;
         }
