@@ -2,6 +2,7 @@ import * as alt from 'alt-client';
 import * as native from 'natives';
 import { systems } from '../../systems';
 import { InventoryEvents } from '@shared/enums/events/webviewEvents';
+import { utility } from '@/utility/utility';
 
 let open = false;
 let ready = false;
@@ -30,6 +31,7 @@ export function closeInventory() {
     native.displayHud(true);
     native.displayRadar(true);
     alt.emitServer(InventoryEvents.hide);
+    utility.buttons.hide();
 }
 
 export function openInventory(secondary_type: string = 'Ground') {
@@ -43,4 +45,12 @@ export function openInventory(secondary_type: string = 'Ground') {
     native.displayHud(false);
     native.displayRadar(false);
     alt.setCursorPos({ x: 900, y: 500 });
+    utility.buttons.show({
+        set: [
+            { text: 'Quick move', input: '~INPUT_AIM~' },
+            { text: 'Split', input: '~INPUT_AIM~', input2: '~INPUT_DUCK~' },
+            { text: 'Stack', input: '~INPUT_ATTACK~', input2: '~INPUT_DUCK~' },
+            { text: 'Use x2', input: '~INPUT_ATTACK~' },
+        ],
+    });
 }
