@@ -1,9 +1,10 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-
 import './ipls';
 
+
 native.setPedDefaultComponentVariation(native.playerPedId());
+
 
 alt.setStat('stamina', 100);
 

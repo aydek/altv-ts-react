@@ -3,6 +3,7 @@ import './systems/timeweather/interval';
 import './systems/player/appearance/events';
 import './systems/chat/events';
 import './systems/inventory/events';
+import './systems/vehicle/events';
 import './events/utilityEvents';
 import './events/defaultEvents';
 import './events/screen/login';
