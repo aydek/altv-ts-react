@@ -209,13 +209,14 @@ const Inventory = () => {
     return (
         <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
             <div
-                className="transition-all"
+                className="transition-all flex pt-[17vh] h-[100vh] px-8 space-x-5 relative"
                 style={{
                     opacity: active ? 1 : 0,
                     pointerEvents: active ? 'auto' : 'none',
                     cursor: active ? 'auto' : 'default',
                 }}
             >
+                <Equipment equipment={equipment} />
                 <Primary
                     capacity={capacity}
                     items={items}
@@ -224,7 +225,7 @@ const Inventory = () => {
                     secondaryItems={secondaryItems}
                     ctrlHold={ctrlHold}
                 />
-                <Equipment equipment={equipment} />
+
                 <Secondary
                     secondaryCapacity={secondaryCapacity}
                     secondaryItems={secondaryItems}

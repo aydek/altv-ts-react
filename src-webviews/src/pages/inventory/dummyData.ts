@@ -2,6 +2,10 @@ export const dummyItems = [
     { id: 0, quantity: 1, description: 'Clown mask vienas du tryes' },
     { id: 1, quantity: 1, description: 'Clown mask' },
     { id: 2, quantity: 1, description: 'Clown mask' },
+    { id: 2, quantity: 1, description: 'Clown mask' },
+    { id: 2, quantity: 1, description: 'Clown mask' },
+    { id: 2, quantity: 1, description: 'Clown mask' },
+    { id: 2, quantity: 1, description: 'Clown mask' },
 ];
 
 export const dummyItemConfig = [

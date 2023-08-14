@@ -7,7 +7,6 @@ import LinearProgress from '../../../components/LinearProgress';
 import Container from '../../../components/Container';
 import { InventoryEvents } from '@events';
 
-
 interface IProps {
     capacity: number;
     items: Array<{ id: number; quantity: number; description: string }>;
@@ -32,19 +31,19 @@ export const Primary = ({ capacity, items, itemsConfig, drag, secondaryItems, ct
 
     const handleRightClick = (index: number) => () => {
         if ('alt' in window) {
-            if(ctrlHold) alt.emit(InventoryEvents.splitPrimary, index);
+            if (ctrlHold) alt.emit(InventoryEvents.splitPrimary, index);
             else alt.emit(InventoryEvents.dropPrimary, index, undefined);
         }
     };
 
     return (
-        <Container className="flex absolute flex-col top-[17vh] select-none" style={{ left: 'calc(2vw + 210px)' }}>
+        <Container className="select-none h-[80%]">
             <div className="font-marker text-3xl font-semibold m-0 absolute top-0 left-0 -translate-y-10">
                 {translate('inventory', 'player')}
             </div>
 
             <div
-                className="grid grid-cols-4 gap-1 max-h-[58vh] overflow-y-scroll overflow-x-hidden px-1 my-1"
+                className="grid grid-cols-4 gap-1 h-[93%]  overflow-y-scroll overflow-x-hidden px-1 my-1 max-invmd:grid-cols-3"
                 tabIndex={-1}
             >
                 {items.map((item, i) => (
@@ -126,8 +125,6 @@ export const Primary = ({ capacity, items, itemsConfig, drag, secondaryItems, ct
                     </div>
                 ) : null}
             </DragOverlay>
-
-            <Instructions />
             <Divider />
             <div className="flex items-center">
                 <div className="mr-2">{translate('inventory', 'capacity')}:</div>

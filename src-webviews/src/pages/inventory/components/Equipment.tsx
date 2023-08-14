@@ -20,13 +20,13 @@ export const Equipment = ({ equipment }: IProps) => {
     return (
         <Droppable
             id="equipment"
-            className="bg-background absolute border border-containerBorder flex flex-col p-1 select-none rounded left-[2vw] top-[17vh] text-whitesmoke "
+            className="bg-background border border-containerBorder p-1 select-none rounded relative text-whitesmoke w-auto h-[510px] "
         >
             <div className="font-marker text-3xl font-semibold m-0 absolute top-0 left-0 -translate-y-10">
                 {translate('inventory', 'clothing')}
             </div>
 
-            <div className="inline-grid grid-cols-2 gap-1" tabIndex={-1}>
+            <div className="grid grid-cols-2 gap-1" tabIndex={-1}>
                 {Object.entries(equipment).map(([key, value]) => (
                     <div
                         key={key}
@@ -45,7 +45,7 @@ export const Equipment = ({ equipment }: IProps) => {
                     </div>
                 ))}
             </div>
-            <div className="absolute w-full left-0 bottom-[-55px] rounded bg-background">
+            <div className="w-full rounded bg-background absolute left-0 bottom-[-50px]">
                 <Droppable
                     id={`destroy_item`}
                     className="relative w-full border border-containerBorder rounded px-[10px] py-1 flex justify-center items-center"

@@ -21,6 +21,11 @@ export default {
             darkred: '#820000',
             darkgreen: '#008200',
         },
+        screens: {
+            inv2xl: '1669px',
+            invxl: '1500px',
+            invmd: '1330px',
+        },
         extend: {
             fontFamily: {
                 sans: ['Roboto', 'sans-serif'],

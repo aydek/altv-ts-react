@@ -5,6 +5,7 @@ import LinearProgress from '../../../components/LinearProgress';
 import { locales } from '../../../locales';
 import Container from '../../../components/Container';
 import { InventoryEvents } from '@events';
+import Divider from '../../../components/Divider';
 
 interface IProps {
     secondaryCapacity: number;
@@ -55,16 +56,16 @@ export const Secondary = ({
     };
 
     return (
-        <Container className="flex absolute flex-col top-[17vh] select-none" style={{ left: 'calc(2vw + 940px)' }}>
+        <Container className="select-none h-[80%]">
             <div className="font-marker text-3xl font-semibold m-0 absolute top-0 left-0 -translate-y-10">
                 {getTitle()}
             </div>
             <div
-                className="grid grid-cols-4 gap-1 max-h-[58vh] overflow-y-scroll overflow-x-hidden px-1 my-1"
+                className="grid grid-cols-4 gap-1 col-span-full h-[93%] overflow-y-scroll overflow-x-hidden px-1 my-1 max-inv2xl:grid-cols-3 max-invxl:grid-cols-2"
                 tabIndex={-1}
             >
                 {secondaryItems.map((item, i) => (
-                    <div key={i}>
+                    <div key={i} className="h-16">
                         {itemsConfig.length > 0 && item.id !== -1 ? (
                             <Draggable id={`secondary_item:${i}`} onContextMenu={handleRightClick(i)}>
                                 <Droppable
@@ -135,6 +136,7 @@ export const Secondary = ({
                     </div>
                 ) : null}
             </DragOverlay>
+            <Divider />
             <div className="flex items-center">
                 <div className="mr-2">{translate('inventory', 'capacity')}:</div>
                 <LinearProgress
