@@ -29,7 +29,7 @@ alt.setInterval(() => {
     const gear = player.vehicle.gear;
     const realGear = realSpeed > 0 && gear === 0 ? 'R' : gear.toString();
     const lights = native.getVehicleLightsState(player.vehicle);
-    const lightState = lights[1] === true || lights[2] === true;
+    const lightState = lights[2] ? 2 : lights[1] ? 1 : 0;
 
     const data = {
         speed: realSpeed.toFixed(),
