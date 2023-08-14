@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { LANG } from '../../../../src/shared/locales/language';
-import { FuelIcon, LightsIcon, SeatBeltIcon } from '../../components/SVG';
+import { FuelIcon, HighBeamIcon, LightsIcon, SeatBeltIcon } from '../../components/SVG';
 import { twMerge } from 'tailwind-merge';
 import LinearProgress from '../../components/LinearProgress';
 import { SpeedometerEvents } from '../../../../src/shared/enums/events/webviewEvents';
@@ -14,7 +14,7 @@ const Speedometer = () => {
     const [fuel, setFuel] = useState(35);
     const [gear, setGear] = useState('1');
     const [tankSize, setTankSize] = useState(100);
-    const [lights, setLight] = useState(false);
+    const [lights, setLight] = useState(0);
     const [belt, setBelt] = useState(false);
 
     useEffect(() => {
@@ -106,7 +106,9 @@ const Speedometer = () => {
                 <div className="font-bold ml-4 flex flex-col items-center">
                     <div className="text-md text-black italic uppercase">{LANG === 'en' ? 'MPH' : 'KMH'}</div>
                     <SeatBeltIcon className={belt ? 'fill-darkgreen' : 'fill-black'} size={20} />
-                    <LightsIcon className={lights ? 'fill-darkgreen' : 'fill-black'} size={20} />
+                    {lights === 0 && <LightsIcon className={'fill-black'} size={20} />}
+                    {lights === 1 && <LightsIcon className={'fill-darkgreen'} size={20} />}
+                    {lights === 2 && <HighBeamIcon className={'fill-darkgreen'} size={20} />}
                 </div>
             </div>
             <div className="flex space-x-[3px] mt-2">
