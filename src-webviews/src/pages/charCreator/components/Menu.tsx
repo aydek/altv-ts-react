@@ -187,13 +187,6 @@ export const Mainmenu = ({
                 secondIcon={<Check className="translate-x-5" />}
             />
 
-            <Container className="absolute flex right-0 -bottom-16 text-sm px-1 py-2 items-center">
-                <div className="rounded-[5px] border p-1 mx-1">A</div>
-                <div className="mr-3">{translate('charCreator', 'turn_left')}</div>
-                <div className="rounded-[5px] border p-1 mx-1">D</div>
-                <div className="mr-3">{translate('charCreator', 'turn_right')}</div>
-            </Container>
-
             <div className="absolute right-[-60px] top-[10px] space-y-3">
                 <Container className="w-10 h-10 flex justify-center items-center rounded-full mx-3 cursor-pointer p-1 hover:bg-backgroundhover">
                     <Camera />
