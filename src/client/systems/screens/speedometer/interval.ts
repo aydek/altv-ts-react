@@ -30,10 +30,11 @@ alt.setInterval(() => {
     const realGear = realSpeed > 0 && gear === 0 ? 'R' : gear.toString();
     const lights = native.getVehicleLightsState(player.vehicle);
     const lightState = lights[2] ? 2 : lights[1] ? 1 : 0;
+    const rpm = player.vehicle.engineOn ? player.vehicle.rpm : 0;
 
     const data = {
         speed: realSpeed.toFixed(),
-        rpm: player.vehicle.rpm,
+        rpm: rpm,
         gear: realGear,
         fuel: 100,
         tankSize: 100,
