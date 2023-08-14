@@ -7,6 +7,7 @@ const player = alt.Player.local;
 
 alt.on('enteredVehicle', () => {
     native.setPedConfigFlag(player, PedConfigFlag.DisableStartingVehicleEngine, true);
+    native.setPedConfigFlag(player, PedConfigFlag.DisableStoppingVehicleEngine, true);
 });
 
 alt.on('keydown', (key: number) => {
