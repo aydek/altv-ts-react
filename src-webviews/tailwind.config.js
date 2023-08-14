@@ -20,6 +20,7 @@ export default {
             darkgray: '#1c1c1c',
             darkred: '#820000',
             darkgreen: '#008200',
+            black: '#000000',
         },
         screens: {
             inv2xl: '1669px',

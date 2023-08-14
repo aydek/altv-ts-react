@@ -5,13 +5,13 @@ import { twMerge } from 'tailwind-merge';
 import LinearProgress from '../../components/LinearProgress';
 import { SpeedometerEvents } from '../../../../src/shared/enums/events/webviewEvents';
 
-const rpmLines = 35;
+const rpmLines = 28;
 
 const Speedometer = () => {
     const [show, setShow] = useState(!('alt' in window));
     const [speed, setSpeed] = useState(22);
     const [rpm, setRpm] = useState(0);
-    const [fuel, setFuel] = useState(100);
+    const [fuel, setFuel] = useState(35);
     const [gear, setGear] = useState('1');
     const [tankSize, setTankSize] = useState(100);
     const [lights, setLight] = useState(false);
@@ -63,17 +63,17 @@ const Speedometer = () => {
     return (
         <div
             className={twMerge(
-                'fixed bottom-4 right-[1%] font-oswald h-[150px] w-[270px] transition-all',
+                'fixed bottom-4 right-[1%] font-oswald h-[150px] w-[190px] transition-all',
                 show ? 'opacity-100' : 'opacity-0'
             )}
         >
             <div className="w-full h-[80px] flex items-end justify-between">
-                <div className="border-4 border-success text-success text-3xl rounded-full w-16 h-16 mr-0 flex items-center justify-center">
+                <div className="border-2 border-success text-success text-xl rounded-full w-10 h-10 mr-0 flex items-center justify-center">
                     {gear}
                 </div>
-                <div className="flex text-8xl italic justify-center">
+                <div className="flex text-6xl italic justify-center">
                     <div
-                        className={speed > 99 ? 'text-whitesmoke' : 'text-background'}
+                        className={speed > 99 ? 'text-whitesmoke' : 'text-black'}
                         style={{
                             textShadow:
                                 speed > 99 &&
@@ -83,7 +83,7 @@ const Speedometer = () => {
                         {formatNumberWithZeros(speed)[0]}
                     </div>
                     <div
-                        className={speed > 9 ? 'text-whitesmoke' : 'text-background'}
+                        className={speed > 9 ? 'text-whitesmoke' : 'text-black'}
                         style={{
                             textShadow:
                                 speed > 9 &&
@@ -93,7 +93,7 @@ const Speedometer = () => {
                         {formatNumberWithZeros(speed)[1]}
                     </div>
                     <div
-                        className={speed > 0 ? 'text-whitesmoke' : 'text-background'}
+                        className={speed > 0 ? 'text-whitesmoke' : 'text-black'}
                         style={{
                             textShadow:
                                 speed > 0 &&
@@ -104,34 +104,34 @@ const Speedometer = () => {
                     </div>
                 </div>
                 <div className="font-bold ml-4 flex flex-col items-center">
-                    <div className="text-lg text-background italic uppercase">{LANG === 'en' ? 'MPH' : 'KMH'}</div>
-                    <SeatBeltIcon className={belt ? 'fill-darkgreen' : 'fill-background'} size={30} />
-                    <LightsIcon className={lights ? 'fill-darkgreen' : 'fill-background'} size={30} />
+                    <div className="text-md text-black italic uppercase">{LANG === 'en' ? 'MPH' : 'KMH'}</div>
+                    <SeatBeltIcon className={belt ? 'fill-darkgreen' : 'fill-black'} size={20} />
+                    <LightsIcon className={lights ? 'fill-darkgreen' : 'fill-black'} size={20} />
                 </div>
             </div>
-            <div className="flex  font-bold italic space-x-[3px] mt-2">
+            <div className="flex space-x-[3px] mt-2">
                 {[...Array(rpmLines)].map((item, index) => (
                     <div
                         key={index + 'key'}
                         className={twMerge(
-                            'w-1 h-4 bg-whitesmoke rounded-sm rotate-12',
-                            index + 1 > calculateRpm() && 'bg-background'
+                            'w-[3px] h-3 bg-whitesmoke rounded-sm rotate-12',
+                            index + 1 > calculateRpm() && 'bg-black'
                         )}
                     ></div>
                 ))}
                 {[...Array(4)].map((item, index) => (
                     <div
                         key={index + 'key'}
-                        className={twMerge('w-1 h-9 bg-darkred rounded-sm rotate-12', rpm >= 1 && 'bg-error')}
+                        className={twMerge('w-[3px] h-7 bg-darkred rounded-sm rotate-12', rpm >= 1 && 'bg-error')}
                     ></div>
                 ))}
             </div>
-            <div className="-translate-y-[18px] flex items-center pr-8">
-                <FuelIcon className="fill-background" />
+            <div className="-translate-y-[12px] flex items-center pr-8">
+                <FuelIcon className="fill-black" size={15} />
                 <LinearProgress
                     max={tankSize}
                     value={fuel}
-                    className={twMerge('bg-background  ml-1 h-3', fuel < 20 && 'bg-darkred')}
+                    className={twMerge('bg-background  ml-1 h-2', fuel < 20 && 'bg-darkred')}
                     color={fuel > 20 ? 'bg-whitesmoke' : 'bg-error'}
                 />
             </div>
