@@ -3,6 +3,7 @@ import * as native from 'natives';
 import { CREATOR_HEADING } from '@shared/config';
 import { systems } from '../../systems';
 import { getFronOfPoint } from '@shared/utility/vector';
+import { utility } from '@/utility/utility';
 
 let creatorOpen: boolean = false;
 
@@ -13,6 +14,12 @@ export async function openCharacterCreator() {
     creatorOpen = true;
     native.setEntityHeading(player, CREATOR_HEADING);
     systems.webview.show('charCreator', true);
+    utility.buttons.show({
+        set: [
+            { text: 'Turn right', input: '~INPUT_MOVE_RIGHT_ONLY~' },
+            { text: 'Turn left', input: '~INPUT_MOVE_LEFT_ONLY~' },
+        ],
+    });
     systems.player.appearance.setModel('mp_m_freemode_01');
     const endPos = getFronOfPoint(alt.Player.local.pos, 2, CREATOR_HEADING);
     LOGIN_CAM.setPosition(new alt.Vector3(endPos.x, endPos.y, endPos.z));

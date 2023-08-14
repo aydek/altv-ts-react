@@ -26,6 +26,7 @@ import { FEMALE_LEGS } from '@shared/constants/clothing/female_legs';
 import { MALE_SHOES } from '@shared/constants/clothing/male_shoes';
 import { FEMALE_SHOES } from '@shared/constants/clothing/female_shoes';
 import { defaultData } from './defaultData';
+import { utility } from '@/utility/utility';
 
 const webview = systems.webview.getInstance();
 const player = alt.Player.local;
@@ -59,6 +60,7 @@ async function handleExit(reason: string = 'back', firstname: string = '', lastn
     allowRotation = true;
     native.doScreenFadeOut(1000);
     systems.webview.hide('charCreator', true);
+    utility.buttons.hide();
     setCreatorOpen(false);
     await alt.Utils.wait(1100);
     native.setEntityCoords(player, LOGIN_CORDS.x, LOGIN_CORDS.y, LOGIN_CORDS.z, false, false, false, true);
