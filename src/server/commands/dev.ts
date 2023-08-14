@@ -81,3 +81,17 @@ systems.chat.registerCommand('veh', 'Create vehicle', [CommandFlags.dev], (playe
         console.log('Invalid model??');
     }
 });
+
+systems.chat.registerCommand(
+    'settime',
+    'Set server time',
+    [CommandFlags.dev],
+    (player: alt.Player, args: Array<any>) => {
+        if (!args[0]) {
+            systems.chat.send(player, `Usage: {${Colors.red}} /settime [hour] [minute]`, ChatIcons.error);
+            return;
+        }
+        const time = { hour: args[0], minute: args[1] ? args[1] : 0 };
+        systems.timeweather.setTime(time.hour, time.minute);
+    }
+);
