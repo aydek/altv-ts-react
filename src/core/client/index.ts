@@ -11,4 +11,4 @@ import './systems/screens/speedometer/interval';
 import './systems/timeweather/events';
 import './commands/events';
 import './utility/noclip/events';
-import './systems/vehicle/events';
+import './systems/vehicle/vehicle';
