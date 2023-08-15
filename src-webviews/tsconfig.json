@@ -11,7 +11,7 @@
         "noEmit": true,
         "jsx": "react-jsx",
         "paths": {
-            "@events": ["../src/shared/enums/events/webviewEvents"]
+            "@events": ["../src/core/shared/enums/events/webviewEvents"]
         }
     },
     "include": ["src"],

@@ -14,10 +14,9 @@ tags = [ 'customTag1', 'customTag2', 'customTag3', 'customTag4' ]
 resources = [
     # Add mods here
     'webviews',
+'dbg_reconnect',
     'core' 
 ]
-
-source-maps = true
 
 # Turn this off in production mode
 debug = true

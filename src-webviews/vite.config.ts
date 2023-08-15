@@ -14,7 +14,7 @@ export default defineConfig({
     },
     resolve: {
         alias: {
-            '@events': path.resolve(__dirname, '../src/shared/enums/events/webviewEvents'),
+            '@events': path.resolve(__dirname, '../src/core/shared/enums/events/webviewEvents'),
         },
     },
 });

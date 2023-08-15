@@ -1,5 +1,5 @@
 import { locales } from './locales';
-import { LANG } from '../../src/shared/locales/language';
+import { LANG } from '../../src/core/shared/locales/language';
 
 type LocalesKeys = keyof typeof locales;
 type LocaleCategoryKeys<T extends LocalesKeys> = keyof (typeof locales)[T];
