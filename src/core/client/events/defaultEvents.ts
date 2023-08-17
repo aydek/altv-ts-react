@@ -13,7 +13,6 @@ function handleDisconnect() {
 function handlePlayerSpawn() {
     systems.screens.chat.init();
     systems.screens.inventory.init();
-    systems.screens.speedometer.init();
+    systems.screens.hud.init();
     systems.screens.notifications.init();
-    systems.screens.notifications.show('info', 5000, 'Connected', 'Welcome to the server');
 }

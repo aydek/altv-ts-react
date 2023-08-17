@@ -7,7 +7,7 @@ import './systems/screens/charSelect/events';
 import './systems/screens/charCreator/events';
 import './systems/screens/inventory/events';
 import './systems/screens/notifications/events';
-import './systems/screens/speedometer/interval';
+import './systems/screens/hud/interval';
 import './systems/timeweather/events';
 import './commands/events';
 import './utility/noclip/events';

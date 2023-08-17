@@ -4,7 +4,7 @@ import { initChat } from './chat/functions';
 import { setReady } from './inventory/functions';
 import { getCameraInstance } from './login/events';
 import { initNotifications, showNotification } from './notifications/functions';
-import { initSpeedometer } from './speedometer/functions';
+import { initHud } from './hud/functions';
 
 export const screens = {
     login: {
@@ -26,7 +26,7 @@ export const screens = {
     inventory: {
         init: setReady,
     },
-    speedometer: {
-        init: initSpeedometer,
+    hud: {
+        init: initHud,
     },
 };

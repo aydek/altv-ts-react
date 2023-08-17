@@ -4,8 +4,8 @@ import Inventory from './inventory';
 import Login from './login';
 import CharSelect from './charSelect';
 import CharCreator from './charCreator';
-import Notifications from './notifications/Notifications';
-import Speedometer from './speedometer/Speedometer';
+import Notifications from './notifications';
+import Hud from './hud';
 
 interface Page {
     name: string;
@@ -19,5 +19,5 @@ export const Pages: Page[] = [
     { name: 'charSelect', component: CharSelect },
     { name: 'charCreator', component: CharCreator },
     { name: 'notifications', component: Notifications },
-    { name: 'speedometer', component: Speedometer },
+    { name: 'hud', component: Hud },
 ];

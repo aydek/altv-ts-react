@@ -26,16 +26,12 @@ alt.onClient(InventoryEvents.updateItems, updateItems);
 alt.onClient(InventoryEvents.removeItem, removeItem);
 alt.onClient(InventoryEvents.removeEquipment, removeEquipment);
 alt.onClient(InventoryEvents.useItem, useItem);
-
 alt.onClient(InventoryEvents.stackPrimary, stackPrimary);
 alt.onClient(InventoryEvents.stackSecondary, stackSecondary);
-
 alt.onClient(InventoryEvents.movePrimary, movePrimary);
 alt.onClient(InventoryEvents.moveSecondary, moveSecondary);
-
 alt.onClient(InventoryEvents.splitPrimary, splitPrimary);
 alt.onClient(InventoryEvents.splitSecondary, splitSecondary);
-
 alt.onClient(InventoryEvents.dropPrimary, dropPrimary);
 alt.onClient(InventoryEvents.dropSecondary, dropSecondary);
 
