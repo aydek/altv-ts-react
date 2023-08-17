@@ -1,7 +1,7 @@
 import alt from 'alt-server';
 import { InventoryEvents } from '../../../shared/enums/events/webviewEvents';
 import { addItem, isSameItem, useItem } from './functions';
-import { equipmentItems, inventoryItems } from './config';
+import { inventoryID, inventoryItems } from './config';
 import { DEFAULT_INV_CAPACITY } from '../../../shared/config';
 import { IGroundItems, addGroundItem, groundItems } from './groundItems';
 import { distance } from '../../../shared/utility/vector';
@@ -45,14 +45,7 @@ function fetchConfig(player: alt.Player, secondary_type: string) {
 }
 
 function fetchAll(player: alt.Player) {
-    alt.emitClient(
-        player,
-        InventoryEvents.fetchPrimary,
-        JSON.stringify(player.inventory),
-        DEFAULT_INV_CAPACITY + player.invCapacity,
-        JSON.stringify(player.equipment),
-        true
-    );
+    alt.emitClient(player, InventoryEvents.fetchPrimary, JSON.stringify(player.inventory), DEFAULT_INV_CAPACITY + player.invCapacity, JSON.stringify(player.equipment), true);
 }
 
 function handleHide(player: alt.Player) {
@@ -60,14 +53,7 @@ function handleHide(player: alt.Player) {
 }
 
 export function fetchPrimary(player: alt.Player) {
-    alt.emitClient(
-        player,
-        InventoryEvents.fetchPrimary,
-        JSON.stringify(player.inventory),
-        DEFAULT_INV_CAPACITY + player.invCapacity,
-        JSON.stringify(player.equipment),
-        true
-    );
+    alt.emitClient(player, InventoryEvents.fetchPrimary, JSON.stringify(player.inventory), DEFAULT_INV_CAPACITY + player.invCapacity, JSON.stringify(player.equipment), true);
 }
 
 export function fetchSecondary(player: alt.Player, custom_secondary: string | undefined = undefined) {
@@ -86,12 +72,7 @@ export function fetchSecondary(player: alt.Player, custom_secondary: string | un
         }
         secondaryCapacity = 99999;
     }
-    alt.emitClient(
-        player,
-        InventoryEvents.fetchSecondary,
-        custom_secondary !== undefined ? custom_secondary : JSON.stringify(secondary_array),
-        secondaryCapacity
-    );
+    alt.emitClient(player, InventoryEvents.fetchSecondary, custom_secondary !== undefined ? custom_secondary : JSON.stringify(secondary_array), secondaryCapacity);
 }
 
 function updateItems(player: alt.Player, data: string) {
@@ -118,31 +99,13 @@ export function removeItem(player: alt.Player, index: number, quantity: number, 
         };
     }
     fetchPrimary(player);
-    if (announce)
-        alt.emitClient(player, InventoryEvents.usedItem, configItem.id, quantity, systems.translate('INV_REMOVE'));
+    if (announce) alt.emitClient(player, InventoryEvents.usedItem, configItem.id, quantity, systems.translate('INV_REMOVE'));
 }
 
 function removeEquipment(player: alt.Player, key: keyof IEquipment) {
     if (key === 'tops') {
-        if (
-            !addItem(
-                player,
-                equipmentItems.top,
-                player.equipment.tops[4],
-                1,
-                player.equipment.tops[0],
-                player.equipment.tops[1],
-                player.equipment.tops[2],
-                player.equipment.tops[3]
-            )
-        ) {
-            systems.notifications.show(
-                player,
-                NotificationIcons.error,
-                5000,
-                'Error',
-                systems.translate('INV_NOT_ENOUGH_SPACE')
-            );
+        if (!addItem(player, inventoryID.top, player.equipment.tops[4], 1, player.equipment.tops[0], player.equipment.tops[1], player.equipment.tops[2], player.equipment.tops[3])) {
+            systems.notifications.show(player, NotificationIcons.error, 5000, 'Error', systems.translate('INV_NOT_ENOUGH_SPACE'));
             return;
         }
         player.equipment.tops = [-1, 0, -1, 0, 'Default'];
@@ -153,13 +116,7 @@ function removeEquipment(player: alt.Player, key: keyof IEquipment) {
             if (configItem.img === key) {
                 const item = player.equipment[key];
                 if (!addItem(player, i, item[2], 1, item[0], item[1])) {
-                    systems.notifications.show(
-                        player,
-                        NotificationIcons.error,
-                        5000,
-                        'Error',
-                        systems.translate('INV_NOT_ENOUGH_SPACE')
-                    );
+                    systems.notifications.show(player, NotificationIcons.error, 5000, 'Error', systems.translate('INV_NOT_ENOUGH_SPACE'));
                     return;
                 }
             }

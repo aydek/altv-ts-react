@@ -11,6 +11,7 @@ import { player } from './player/player';
 import { changeWeather, getCurrentTime, getCurrentWeather, lockWeather, setCurentTime } from './timeweather/functions';
 import { showNotification } from './notifications/functions';
 import { addItem } from './inventory/functions';
+import { fetchPrimary, removeItem } from './inventory/events';
 
 export const systems = {
     chat: {
@@ -33,6 +34,8 @@ export const systems = {
     },
     inventory: {
         addItem: addItem,
+        fetchPrimary: fetchPrimary,
+        removeItem: removeItem,
     },
     translate: <T extends keyof typeof TRANSLATE>(key: T) => (TRANSLATE[key] as Record<typeof LANG, string>)[LANG],
 };

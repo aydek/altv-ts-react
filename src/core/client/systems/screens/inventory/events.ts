@@ -15,7 +15,6 @@ webview.on(InventoryEvents.useItem, useItem);
 webview.on(InventoryEvents.stackPrimary, stackPrimary);
 webview.on(InventoryEvents.stackSecondary, stackSecondary);
 
-
 webview.on(InventoryEvents.movePrimary, movePrimary);
 webview.on(InventoryEvents.moveSecondary, moveSecondary);
 webview.on(InventoryEvents.splitPrimary, splitPrimary);
@@ -96,8 +95,8 @@ function returnSecondary(secondary_array: string, secondary_capacity: number) {
     webview.emit(InventoryEvents.fetchSecondary, secondary_array, secondary_capacity);
 }
 
-function usedItem(id: number, qantity: number, text: string) {
-    webview.emit(InventoryEvents.usedItem, id, qantity, text);
+function usedItem(id: number, qantity: number, text: string, delay: boolean = false) {
+    webview.emit(InventoryEvents.usedItem, id, qantity, text, delay);
 }
 
 let presstime = 0;

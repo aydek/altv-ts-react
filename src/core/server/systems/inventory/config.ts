@@ -14,7 +14,7 @@ export const inventoryItems = [
     { id: 12, category: 'general', img: 'phone', name: 'Mobile phone', weight: 0.1 },
 ];
 
-export const equipmentItems = {
+export const inventoryID = {
     shoes: 0,
     legs: 1,
     top: 2,

@@ -20,7 +20,8 @@ export const TRANSLATE = {
     /**
      * INVENTORY
      */
-    INV_USED: { en: 'Used..', lt: 'Naudoji..' },
+    INV_USED: { en: 'Used..', lt: 'Panaudota..' },
+    INV_USING: { en: 'Using..', lt: 'Nadojate..' },
     INV_REMOVE: { en: 'Removed..', lt: 'Sunaikinta..' },
     INV_ADDED: { en: 'Added..', lt: 'Pridėta..' },
     INV_NOT_ENOUGH_SPACE: { en: 'Not enough space in inventory', lt: 'Neužtenka vietos inventoriuje' },
