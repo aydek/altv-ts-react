@@ -4,7 +4,6 @@ import { inventoryID, inventoryItems } from './config';
 import { systems } from '../systems';
 import { DEFAULT_INV_CAPACITY } from '../../../shared/config';
 import { InventoryEvents } from '../../../shared/enums/events/webviewEvents';
-import { fetchPrimary, removeItem } from './events';
 import { NotificationIcons } from '../../../shared/enums/icons';
 import { DefaultEvents } from '../../../shared/enums/events/defaultEvents';
 
@@ -85,29 +84,12 @@ function getFreeInventorySlots(player: alt.Player): number {
 
 export function useItem(player: alt.Player, index: number, quantity: number = 1, update: boolean = true) {
     alt.emit(DefaultEvents.playerUseItem, player, index, quantity, update);
+
     const item = player.inventory[index];
-    if (item === undefined) return;
-    if (item.id == -1) return;
-    let remove = true;
     const itemid = typeof item.id === 'string' ? parseInt(item.id) : item.id;
-    const itemConfig = inventoryItems[itemid];
-    if (itemConfig === undefined) return;
 
     if (itemid === inventoryID.phone) {
-        remove = false;
-        update = false;
         systems.notifications.show(player, NotificationIcons.info, 5000, 'You are using a phone...', 'Phone');
-    } else {
-        alt.logError(`[inv] UseItem item index (${index}) not found!`);
-        return;
-    }
-
-    if (remove) {
-        removeItem(player, index, quantity);
-    } else alt.emitClient(player, InventoryEvents.usedItem, item.id, quantity, systems.translate('INV_USED'));
-
-    if (update) {
-        fetchPrimary(player);
     }
 }
 
