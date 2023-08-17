@@ -26,23 +26,15 @@ const DevMenu: React.FC = () => {
     }, []);
 
     const togglePage = (page: PageEntry) => {
-        setSelectedPages((prevSelected) =>
-            prevSelected.some((p) => p.name === page.name)
-                ? prevSelected.filter((p) => p.name !== page.name)
-                : [...prevSelected, page]
-        );
+        setSelectedPages((prevSelected) => (prevSelected.some((p) => p.name === page.name) ? prevSelected.filter((p) => p.name !== page.name) : [...prevSelected, page]));
     };
 
     return (
         <div>
             {menuOpen && (
-                <Container className="absolute bottom-4 left-4 space-x-2 z-50 ">
+                <Container className="absolute top-4 right-4 space-x-2 z-50 ">
                     {Pages.map((page) => (
-                        <Button
-                            className={selectedPages.includes(page) ? 'bg-success' : ''}
-                            key={page.name}
-                            onClick={() => togglePage(page)}
-                        >
+                        <Button className={selectedPages.includes(page) ? 'bg-success' : ''} key={page.name} onClick={() => togglePage(page)}>
                             {page.name}
                         </Button>
                     ))}
