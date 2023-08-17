@@ -63,7 +63,11 @@ const Speedometer = () => {
 
     return (
         <div>
-            {!('alt' in window) && <Button onClick={() => setShow(!show)}>Show speedo</Button>}
+            {!('alt' in window) && (
+                <Button className="absolute top-0 z-30" onClick={() => setShow(!show)}>
+                    Show speedo
+                </Button>
+            )}
             <div className={twMerge('fixed bottom-4 right-[1%] font-oswald h-[150px] w-[190px] transition-all duration-700', show ? 'translate-x-0 opacity-100' : 'translate-x-60 opacity-0')}>
                 <div className="w-full h-[80px] flex items-end justify-between">
                     <div className="border-2 border-success text-success text-xl rounded-full w-10 h-10 mr-0 flex items-center justify-center">{gear}</div>
