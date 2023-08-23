@@ -47,8 +47,8 @@ function handleUseItem(player: alt.Player, index: number, quantity: number = 1, 
     if (itemid >= inventoryID.shoes && itemid <= inventoryID.armour) {
         let timeout = 0;
         if (itemid === inventoryID.armour) {
-            alt.emitClient(player, InventoryEvents.usedItem, item.id, quantity, systems.translate('INV_USING'), true);
-            timeout = 5000;
+            // alt.emitClient(player, InventoryEvents.usedItem, item.id, quantity, systems.translate('INV_USING'), true);
+            // timeout = 5000;
         }
         alt.setTimeout(() => {
             if (item !== player.inventory[index]) {
