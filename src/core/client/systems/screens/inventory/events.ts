@@ -95,8 +95,8 @@ function returnSecondary(secondary_array: string, secondary_capacity: number) {
     webview.emit(InventoryEvents.fetchSecondary, secondary_array, secondary_capacity);
 }
 
-function usedItem(id: number, qantity: number, text: string, delay: boolean = false) {
-    webview.emit(InventoryEvents.usedItem, id, qantity, text, delay);
+function usedItem(id: number, qantity: number, text: string) {
+    webview.emit(InventoryEvents.usedItem, id, qantity, text);
 }
 
 let presstime = 0;
