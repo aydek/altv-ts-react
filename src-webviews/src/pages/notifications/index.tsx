@@ -11,6 +11,8 @@ interface IState {
     message: string;
     hidden: boolean;
     active: boolean;
+    progress?: boolean;
+    uuid: number;
 }
 
 const icons = {
@@ -28,20 +30,20 @@ const icons = {
 const Notifications = () => {
     const [notifications, setNotifications] = useState<Array<IState>>([]);
 
-    const showNotification = (type: string, hide: number, title: string, message: string) => {
+    const showNotification = (type: string, hide: number, title: string, message: string, progress: boolean = false) => {
         setNotifications((prev) => {
             if (prev.length > 5) prev[0].hidden = true;
-            return [...prev, { type, hide: Date.now() + hide, title, message, hidden: false, active: false }];
+            return [...prev, { type, hide: Date.now() + hide, title, message, hidden: false, active: false, progress, uuid: Date.now() }];
         });
     };
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setNotifications((prev) => prev.filter((n) => n.hidden === false));
             setNotifications((prev) => {
                 return prev.map((n) => {
                     if (n.hide < Date.now()) {
-                        return { ...n, hidden: true };
+                        if (!n.hidden) return { ...n, hidden: true, hide: Date.now() + 500 };
+                        else return null;
                     }
 
                     if (!n.active) {
@@ -50,7 +52,8 @@ const Notifications = () => {
                     return n;
                 });
             });
-        }, 500);
+            setNotifications((prev) => prev.filter((n) => n !== null));
+        }, 10);
 
         if ('alt' in window) {
             alt.on(NotificationEvents.show, showNotification);
@@ -62,6 +65,32 @@ const Notifications = () => {
             }
         };
     }, []);
+
+    const getProgress = (endTime: number, startTime: number) => {
+        const currentTime = Date.now();
+
+        // If the end time is in the past, return 0 (completed)
+        if (endTime <= currentTime) {
+            return 720;
+        }
+        const timeLeft = endTime - currentTime;
+        const totalTime = endTime - startTime; // You'll need to define startTime somewhere
+        const progressBarValue = (1 - timeLeft / totalTime) * 720; // Calculate progress
+        return progressBarValue;
+    };
+
+    const getStrokeColor = (type: string) => {
+        const colors = {
+            info: '#5598C3',
+            bell: '#f4f4f4',
+            success: '#3DBA39',
+            warning: '#fdde2f',
+            error: '#CC394F',
+        };
+        const color = colors[type];
+        console.log(color);
+        return color;
+    };
 
     const handle = () => {
         showNotification('info', 5000, 'Title', 'Hello darkness my old friend!');
@@ -89,23 +118,33 @@ const Notifications = () => {
 
             <div className="absolute right-5 top-5 space-y-1 overflow-hidden">
                 {notifications.map((n, i) => (
-                    <Container
-                        key={n.hide}
-                        className={twMerge(
-                            'w-72 transition-all duration-300 opacity-0 flex items-center rounded-3xl',
-                            `${n.hidden && 'translate-x-full'} ${n.active && 'opacity-100'}`
-                        )}
-                    >
-                        <div className="rounded-full bg-background w-10 h-10 flex items-center justify-center mr-3">
-                            {icons[n.type]}
-                        </div>
+                    <div key={n.uuid + i} className={twMerge('relative transition-all duration-300 opacity-0', `${n.hidden && 'translate-x-full'} ${n.active && 'opacity-100'}`)}>
+                        <svg className="w-[300px] h-[80px]">
+                            <rect x="5" y="5" rx="25" ry="25" strokeWidth="5" className="w-[290px] h-[70px] fill-background stroke-gray " />
+                            <rect
+                                x="5"
+                                y="5"
+                                rx="25"
+                                ry="25"
+                                strokeDasharray="720"
+                                strokeLinecap="round"
+                                strokeDashoffset={getProgress(n.hidden ? n.uuid : n.hide, n.uuid)}
+                                strokeWidth="5"
+                                stroke={getStrokeColor(n.type)}
+                                className={twMerge('w-[290px] h-[70px] fill-transparent')}
+                            />
+                        </svg>
 
-                        <div className="w-[80%]">
-                            <div className="font-semibold">{n.title}</div>
+                        <div className="absolute flex items-center text-whitesmoke top-1/2 -translate-y-1/2 left-5">
+                            <div className="rounded-full bg-background w-10 h-10 flex items-center justify-center mr-3">{icons[n.type]}</div>
 
-                            <div className="text-sm">{n.message}</div>
+                            <div className="w-[80%]">
+                                <div className="font-semibold">{n.title}</div>
+
+                                <div className="text-sm">{n.message}</div>
+                            </div>
                         </div>
-                    </Container>
+                    </div>
                 ))}
             </div>
         </div>
