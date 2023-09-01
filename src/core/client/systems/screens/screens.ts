@@ -3,7 +3,7 @@ import { openCharSelect } from './charSelect/functions';
 import { initChat } from './chat/functions';
 import { setReady } from './inventory/functions';
 import { getCameraInstance } from './login/events';
-import { initNotifications, showNotification } from './notifications/functions';
+import { cancelNotification, initNotifications, showNotification } from './notifications/functions';
 import { initHud } from './hud/functions';
 
 export const screens = {
@@ -22,6 +22,7 @@ export const screens = {
     notifications: {
         init: initNotifications,
         show: showNotification,
+        cancel: cancelNotification,
     },
     inventory: {
         init: setReady,
