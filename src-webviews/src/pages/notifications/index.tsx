@@ -101,7 +101,6 @@ const Notifications = () => {
             error: '#CC394F',
         };
         const color = colors[type];
-        console.log(color);
         return color;
     };
 
