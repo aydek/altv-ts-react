@@ -10,7 +10,7 @@
         "dev": "node ./scripts/watch.js",
         "[-] Utility": "",
         "dev:ui": "npx vite ./src-webviews --clearScreen=false --host=localhost --port=3000",
-        "update": "altv-pkg d release"
+        "update": "altv-pkg d rc"
     },
     "author": "aydek",
     "license": "ISC",
