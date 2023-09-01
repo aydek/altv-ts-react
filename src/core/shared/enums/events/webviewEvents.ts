@@ -35,6 +35,7 @@ export const enum ChatEvents {
 
 export const enum NotificationEvents {
     show = 'Webview:Notification:Show',
+    cancel = 'Webview:Notification:Cancel',
 }
 
 export const enum InventoryEvents {
