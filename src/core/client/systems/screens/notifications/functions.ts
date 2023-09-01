@@ -9,3 +9,8 @@ export function showNotification(type: string, hide: number, title: string, mess
     const webview = systems.webview.getInstance();
     webview.emit(NotificationEvents.show, type, hide, title, message);
 }
+
+export function cancelNotification(searchText: string) {
+    const webview = systems.webview.getInstance();
+    webview.emit(NotificationEvents.cancel, searchText);
+}
