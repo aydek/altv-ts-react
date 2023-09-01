@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
-import Container from '../../components/Container';
 import { twMerge } from 'tailwind-merge';
 import { BellIcon, ErrorIcon, InfoIcon, SuccessIcon, WarningIcon } from '../../components/SVG';
 import { NotificationEvents } from '@events';
-
 interface IState {
     type: string;
     hide: number;
@@ -11,7 +9,6 @@ interface IState {
     message: string;
     hidden: boolean;
     active: boolean;
-    progress?: boolean;
     uuid: number;
 }
 
@@ -30,11 +27,25 @@ const icons = {
 const Notifications = () => {
     const [notifications, setNotifications] = useState<Array<IState>>([]);
 
-    const showNotification = (type: string, hide: number, title: string, message: string, progress: boolean = false) => {
+    const showNotification = (type: string, hide: number, title: string, message: string) => {
         setNotifications((prev) => {
             if (prev.length > 5) prev[0].hidden = true;
-            return [...prev, { type, hide: Date.now() + hide, title, message, hidden: false, active: false, progress, uuid: Date.now() }];
+            return [...prev, { type, hide: Date.now() + hide, title, message, hidden: false, active: false, uuid: Date.now() }];
         });
+    };
+
+    const cancelNotification = (searchString: string) => {
+        const updatedNotifications = notifications.map((notification) => {
+            if (notification.message.includes(searchString)) {
+                return {
+                    ...notification,
+                    hide: Date.now(),
+                };
+            }
+            return notification;
+        });
+
+        setNotifications(updatedNotifications);
     };
 
     useEffect(() => {
@@ -57,11 +68,13 @@ const Notifications = () => {
 
         if ('alt' in window) {
             alt.on(NotificationEvents.show, showNotification);
+            alt.on(NotificationEvents.cancel, cancelNotification);
         }
         return () => {
             clearInterval(interval);
             if ('alt' in window) {
                 alt.off(NotificationEvents.show, showNotification);
+                alt.off(NotificationEvents.cancel, cancelNotification);
             }
         };
     }, []);
@@ -74,8 +87,8 @@ const Notifications = () => {
             return 720;
         }
         const timeLeft = endTime - currentTime;
-        const totalTime = endTime - startTime; // You'll need to define startTime somewhere
-        const progressBarValue = (1 - timeLeft / totalTime) * 720; // Calculate progress
+        const totalTime = endTime - startTime;
+        const progressBarValue = (1 - timeLeft / totalTime) * 720;
         return progressBarValue;
     };
 
@@ -95,10 +108,10 @@ const Notifications = () => {
     const handle = () => {
         showNotification('info', 5000, 'Title', 'Hello darkness my old friend!');
         setTimeout(() => {
-            showNotification('bell', 5000, 'Title', 'Hello darkness my old friend!');
+            showNotification('bell', 10000, 'Title', 'Hello darkness my old friend! clear');
         }, 1000);
         setTimeout(() => {
-            showNotification('success', 5000, 'Title', 'Hello darkness my old friend!');
+            showNotification('success', 20000, 'Title', 'Hello darkness my old friend!');
         }, 2000);
         setTimeout(() => {
             showNotification('warning', 5000, 'Title', 'Hello darkness my old friend!');
@@ -109,11 +122,16 @@ const Notifications = () => {
     };
 
     return (
-        <div className="">
+        <>
             {!('alt' in window) && (
-                <button className="absolute left-4 top-4" onClick={handle}>
-                    Get some notifications
-                </button>
+                <div className="absolute left-4 top-4 flex flex-col space-y-2">
+                    <button className="bg-discord rounded p-2" onClick={handle}>
+                        Get some notifications
+                    </button>
+                    <button className="bg-discord rounded p-2" onClick={() => cancelNotification('clear')}>
+                        Clear notification
+                    </button>
+                </div>
             )}
 
             <div className="absolute right-5 top-5 space-y-1 overflow-hidden">
@@ -147,7 +165,7 @@ const Notifications = () => {
                     </div>
                 ))}
             </div>
-        </div>
+        </>
     );
 };
 
