@@ -1,15 +1,9 @@
 import { LANG } from '../../shared/locales/language';
 import { TRANSLATE } from '../../shared/locales/locales';
-import {
-    broadcastChatMessage,
-    getAvailableCommand,
-    invokeCmd,
-    registerCommand,
-    sendChatMessage,
-} from './chat/fucntions';
+import { broadcastChatMessage, getAvailableCommand, invokeCmd, registerCommand, sendChatMessage } from './chat/fucntions';
 import { player } from './player/player';
 import { changeWeather, getCurrentTime, getCurrentWeather, lockWeather, setCurentTime } from './timeweather/functions';
-import { showNotification } from './notifications/functions';
+import { cancelNotification, showNotification } from './notifications/functions';
 import { addItem } from './inventory/functions';
 import { fetchPrimary, removeItem } from './inventory/events';
 
@@ -31,6 +25,7 @@ export const systems = {
     player: player,
     notifications: {
         show: showNotification,
+        cancel: cancelNotification,
     },
     inventory: {
         addItem: addItem,
