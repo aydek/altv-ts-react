@@ -1,5 +1,4 @@
 import * as alt from 'alt-server';
-import { MILLISECONDS_IN_MINUTE } from '../../../shared/config';
 import {
     changeWeather,
     getCurrentTime,
@@ -8,8 +7,9 @@ import {
     getWeatherTimeLeft,
     setCurentTime,
 } from './functions';
-import { WorldEvents } from '../../../shared/enums/events/worldEvents';
-import { WeatherType } from '../../../shared/enums/altv';
+import { WorldEvents } from '@shared/enums/events/worldEvents';
+import { MILLISECONDS_IN_MINUTE } from '@shared/config';
+import { WeatherType } from '@shared/enums/altv';
 
 alt.setInterval(() => {
     let currentTime = getCurrentTime();

@@ -2,10 +2,11 @@ import alt from 'alt-server';
 
 import { inventoryID, inventoryItems } from './config';
 import { systems } from '../systems';
-import { DEFAULT_INV_CAPACITY } from '../../../shared/config';
-import { InventoryEvents } from '../../../shared/enums/events/webviewEvents';
-import { NotificationIcons } from '../../../shared/enums/icons';
-import { DefaultEvents } from '../../../shared/enums/events/defaultEvents';
+import { DEFAULT_INV_CAPACITY } from '@shared/config';
+import { InventoryEvents } from '@shared/enums/events/webviewEvents';
+import { NotificationIcons } from '@shared/enums/icons';
+import { DefaultEvents } from '@shared/enums/events/defaultEvents';
+
 
 export function addItem(player: alt.Player, id: number, description: string, quantity: number, p1: any = null, p2: any = null, p3: any = null, p4: any = null, targetIndex: number = -1) {
     const itemConfig = inventoryItems.find((item) => item.id === id);

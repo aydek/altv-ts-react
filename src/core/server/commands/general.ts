@@ -1,10 +1,9 @@
 import alt from 'alt-server';
-
-import { CommandEvents } from '../../shared/enums/events/commandEvents';
 import { systems } from '../systems/systems';
-import { CommandFlags } from '../../shared/enums/flags';
-import { Colors } from '../../shared/enums/colors';
-import { ChatIcons } from '../../shared/enums/icons';
+import { CommandFlags } from '@shared/enums/flags';
+import { CommandEvents } from '@shared/enums/events/commandEvents';
+import { Colors } from '@shared/enums/colors';
+import { ChatIcons } from '@shared/enums/icons';
 
 systems.chat.registerCommand('q', 'Quit game', [CommandFlags.player], (player: alt.Player, args: Array<any>) => {
     alt.emitClient(player, CommandEvents.quit);

@@ -1,10 +1,10 @@
 import alt from 'alt-server';
 
 import { systems } from '../systems/systems';
-import { CommandFlags } from '../../shared/enums/flags';
-import { Colors } from '../../shared/enums/colors';
-import { ChatIcons } from '../../shared/enums/icons';
 import { utility } from '../utility/utility';
+import { CommandFlags } from '@shared/enums/flags';
+import { Colors } from '@shared/enums/colors';
+import { ChatIcons } from '@shared/enums/icons';
 
 systems.chat.registerCommand(
     'coords',

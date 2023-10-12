@@ -1,5 +1,5 @@
+import { NoclipEvents } from '@shared/enums/events/utilityEvents';
 import * as alt from 'alt-server';
-import { NoclipEvents } from '../../shared/enums/events/utilityEvents';
 
 alt.onClient(NoclipEvents.toogle, handleNoclip);
 alt.onClient(NoclipEvents.visible, handleVisible);

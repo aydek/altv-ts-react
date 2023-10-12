@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
-import { DefaultEvents } from '../../shared/enums/events/defaultEvents';
 import { systems } from '../systems/systems';
 import { utility } from '../utility/utility';
+import { DefaultEvents } from '@shared/enums/events/defaultEvents';
 
 alt.on(DefaultEvents.playerConnect, handlePlayerConnect);
 alt.on(DefaultEvents.playerDisconnect, playerDisconnect);

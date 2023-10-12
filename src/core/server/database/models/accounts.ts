@@ -1,5 +1,5 @@
+import { DEFAULT_CHARACTERS_ALLOWED } from '@shared/config';
 import  mongoose from 'mongoose';
-import { DEFAULT_CHARACTERS_ALLOWED } from '../../../shared/config';
 
 interface IAccount {
     discordID: string;

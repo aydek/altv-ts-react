@@ -1,12 +1,12 @@
 import alt from 'alt-server';
-import { InventoryEvents } from '../../../shared/enums/events/webviewEvents';
 import { addItem, isSameItem, useItem } from './functions';
 import { inventoryID, inventoryItems } from './config';
-import { DEFAULT_INV_CAPACITY } from '../../../shared/config';
 import { IGroundItems, addGroundItem, groundItems } from './groundItems';
-import { distance } from '../../../shared/utility/vector';
 import { systems } from '../systems';
-import { NotificationIcons } from '../../../shared/enums/icons';
+import { InventoryEvents } from '@shared/enums/events/webviewEvents';
+import { DEFAULT_INV_CAPACITY } from '@shared/config';
+import { NotificationIcons } from '@shared/enums/icons';
+import { distance } from '@shared/utility/vector';
 
 const nullItem = {
     id: -1,

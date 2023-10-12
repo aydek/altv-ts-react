@@ -1,6 +1,6 @@
+import { AnimationEvents } from '@shared/enums/events/appieranceEvents';
+import { AnimationFlags } from '@shared/enums/flags';
 import * as alt from 'alt-server';
-import { AnimationEvents } from '../../../../shared/enums/events/appieranceEvents';
-import { AnimationFlags } from '../../../../shared/enums/flags';
 
 export function playAnimation(
     player: alt.Player,

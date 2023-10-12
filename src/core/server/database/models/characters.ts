@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import * as alt from 'alt-server';
-import { SPAWN_POSITION } from '../../../shared/config';
+import { SPAWN_POSITION } from '@shared/config';
 
 interface ICharacter {
     owner: string;

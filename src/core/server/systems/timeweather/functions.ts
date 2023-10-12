@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
-import { MILLISECONDS_IN_MINUTE } from '../../../shared/config';
-import { WorldEvents } from '../../../shared/enums/events/worldEvents';
 import { utility } from '../../utility/utility';
 import { WeatherType } from '../../../shared/enums/altv';
+import { MILLISECONDS_IN_MINUTE } from '@shared/config';
+import { WorldEvents } from '@shared/enums/events/worldEvents';
 
 let currentTime: { hour: number; minute: number } = {
     hour: 12,

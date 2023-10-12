@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 import { Account } from '../../database/models/accounts';
-import { LoginEvents } from '../../../shared/enums/events/webviewEvents';
 import { utility } from '../../utility/utility';
+import { LoginEvents } from '@shared/enums/events/webviewEvents';
 
 alt.onClient(LoginEvents.loginBegin, handleDiscordLogin);
 
@@ -48,9 +48,7 @@ async function handleDiscordLogin(player: alt.Player, token: string) {
             hwidExHash: player.hwidExHash,
         });
         await doc.save();
-        utility.log.system(
-            `Player just registered. Name: ${player.name} DiscordID: ${data.id} Discord name: ${data.username}`
-        );
+        utility.log.system(`Player just registered. Name: ${player.name} DiscordID: ${data.id} Discord name: ${data.username}`);
     }
 
     player.emit(LoginEvents.loginDone);

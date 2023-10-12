@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
-import { VehicleKeybinds } from '../../../shared/enums/events/vehicleEvents';
 import { systems } from '../systems';
-import { NotificationIcons } from '../../../shared/enums/icons';
+import { VehicleKeybinds } from '@shared/enums/events/vehicleEvents';
+import { NotificationIcons } from '@shared/enums/icons';
 
 alt.onClient(VehicleKeybinds.toogleEngine, hangleEngineToggle);
 

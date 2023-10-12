@@ -1,10 +1,9 @@
 import * as alt from 'alt-server';
-import { AppearanceEvents } from '../../../../shared/enums/events/appieranceEvents';
 import { systems } from '../../systems';
-import { DefaultEvents } from '../../../../shared/enums/events/defaultEvents';
 import { inventoryID, inventoryItems } from '../../inventory/config';
-import { NotificationIcons } from '../../../../shared/enums/icons';
-import { InventoryEvents } from '../../../../shared/enums/events/webviewEvents';
+import { AppearanceEvents } from '@shared/enums/events/appieranceEvents';
+import { DefaultEvents } from '@shared/enums/events/defaultEvents';
+import { NotificationIcons } from '@shared/enums/icons';
 
 alt.onClient(AppearanceEvents.model, handleModelChange);
 alt.onClient(AppearanceEvents.setTop, handleSetTop);

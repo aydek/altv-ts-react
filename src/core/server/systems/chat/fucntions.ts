@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
-import { CommandFlags } from '../../../shared/enums/flags';
-import { ChatEvents } from '../../../shared/enums/events/webviewEvents';
 import { systems } from '../systems';
 import { utility } from '../../utility/utility';
+import { CommandFlags } from '@shared/enums/flags';
+import { ChatEvents } from '@shared/enums/events/webviewEvents';
 
 let cmdHandlers: any = {};
 let cmdFlags: any = {};

@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 import { Character } from '../../database/models/characters';
-import { CCreatorEvents, CSelectionEvents } from '../../../shared/enums/events/webviewEvents';
-import { MAX_INV_ITEMS, SPAWN_POSITION } from '../../../shared/config';
+import { CCreatorEvents, CSelectionEvents } from '@shared/enums/events/webviewEvents';
+import { MAX_INV_ITEMS, SPAWN_POSITION } from '@shared/config';
 
 alt.onClient(CCreatorEvents.exit, handleExit);
 alt.onClient(CCreatorEvents.new, handleNewCharacter);
@@ -10,14 +10,7 @@ function handleExit(player: alt.Player) {
     player.currentViewCharacter = undefined;
 }
 
-async function handleNewCharacter(
-    player: alt.Player,
-    firstname: string,
-    lastname: string,
-    age: number,
-    state: string,
-    equipment: IEquipment
-) {
+async function handleNewCharacter(player: alt.Player, firstname: string, lastname: string, age: number, state: string, equipment: IEquipment) {
     const name = firstname.charAt(0).toUpperCase() + firstname.substring(1);
     const surname = lastname.charAt(0).toUpperCase() + lastname.substring(1);
     const data = JSON.parse(state);

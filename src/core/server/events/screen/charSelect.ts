@@ -1,9 +1,9 @@
 import * as alt from 'alt-server';
 import { Character } from '../../database/models/characters';
 import { Account } from '../../database/models/accounts';
-import { JOBS_INFO } from '../../../shared/constants/jobs';
-import { CSelectionEvents } from '../../../shared/enums/events/webviewEvents';
 import { systems } from '../../systems/systems';
+import { CSelectionEvents } from '@shared/enums/events/webviewEvents';
+import { JOBS_INFO } from '@shared/constants/jobs';
 
 alt.onClient(CSelectionEvents.fetch, fetchCharactersData);
 alt.onClient(CSelectionEvents.view, handleView);

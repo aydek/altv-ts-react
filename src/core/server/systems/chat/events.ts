@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
-import { ChatEvents } from '../../../shared/enums/events/webviewEvents';
 import { Account } from '../../database/models/accounts';
 import { systems } from '../systems';
 import { utility } from '../../utility/utility';
+import { ChatEvents } from '@shared/enums/events/webviewEvents';
 
 alt.onClient(ChatEvents.fetchCommands, handleFetchCommands);
 alt.onClient(ChatEvents.updateSize, handleUpdateSize);

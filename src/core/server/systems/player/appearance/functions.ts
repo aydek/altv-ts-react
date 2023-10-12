@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import { femaleTorsoCombos, maleTorsoCombos } from '../../../../shared/constants/clothing/torsoCombos';
-import { ClothesComponent, PropComponent } from '../../../../shared/enums/clothing';
+import { femaleTorsoCombos, maleTorsoCombos } from '@shared/constants/clothing/torsoCombos';
+import { ClothesComponent, PropComponent } from '@shared/enums/clothing';
 
 export function setTop(player: alt.Player, top: number, toptexture: number, under: number, undertexture: number) {
     let sex = player.model === alt.hash('mp_f_freemode_01') ? 1 : 0;
@@ -27,17 +27,7 @@ export function updatePlayerAppearance(player: alt.Player, customData: IDna | un
     const data = customData ? customData : player.dna;
 
     // DNA
-    player.setHeadBlendData(
-        data.mother,
-        data.father,
-        0,
-        data.mother,
-        data.father,
-        0,
-        data.resemblance,
-        data.skintone,
-        0
-    );
+    player.setHeadBlendData(data.mother, data.father, 0, data.mother, data.father, 0, data.resemblance, data.skintone, 0);
 
     // HAIR//
     if (data.hair > -1) {
