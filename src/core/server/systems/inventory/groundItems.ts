@@ -17,11 +17,7 @@ export interface IGroundItems {
 export const groundItems: Array<IGroundItems> = [];
 
 export function addGroundItem(data: IGroundItems, player: alt.Player, playAnim = true) {
-    const marker = new alt.Marker(
-        2,
-        new alt.Vector3(data.pos.x, data.pos.y, data.pos.z - 0.8),
-        new alt.RGBA(255, 255, 255, 120)
-    );
+    const marker = new alt.Marker(2, new alt.Vector3(data.pos.x, data.pos.y, data.pos.z - 0.8), new alt.RGBA(255, 255, 255, 120)); //
 
     marker.scale = new alt.Vector3(0.3, 0.3, 0.3);
 

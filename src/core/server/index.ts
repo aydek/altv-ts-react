@@ -1,3 +1,4 @@
+import './utility/ipc';
 import './database/init';
 import './systems/timeweather/interval';
 import './systems/player/appearance/events';
@@ -13,5 +14,8 @@ import './commands/general';
 import './commands/dev';
 
 import { utility } from './utility/utility';
+import { connectLocalClient } from './utility/reconnect/reconnect';
+
+connectLocalClient();
 
 utility.log.system(`alt:V Server - Boilerplate Started`);
