@@ -1,4 +1,4 @@
-import './utility/ipc';
+import './utility/reconnect/ipc';
 import './database/init';
 import './systems/timeweather/interval';
 import './systems/player/appearance/events';
