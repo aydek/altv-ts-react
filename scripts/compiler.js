@@ -1,5 +1,6 @@
 import fs from 'fs-extra';
 import * as glob from 'glob';
+import path from 'path';
 import swc from '@swc/core';
 import { normalizeFilePath } from './shared.js';
 
@@ -29,9 +30,18 @@ if (fs.existsSync('resources/core')) {
 let compileCount = 0;
 for (let i = 0; i < filesToCompile.length; i++) {
     const filePath = normalizeFilePath(filesToCompile[i]);
-    const finalPath = filePath.replace('src/', 'resources/').replace('.ts', '.js');
+    const relativePath = path.relative('src/core', filePath);
+    const finalPath = path.join('resources/core', relativePath).replace('.ts', '.js');
     const compiled = swc.transformFileSync(filePath, SWC_CONFIG);
-    fs.outputFileSync(finalPath, compiled.code, { encoding: 'utf-8' });
+
+    // Calculate the relative path from the source file to the shared folder
+    const depth = relativePath.split(path.sep).length - 1;
+    const sharedPath = Array(depth).fill('..').join('/');
+
+    // Replace @shared with the calculated relative path
+    const modifiedCode = compiled.code.replace(/@shared/g, sharedPath + '/shared');
+
+    fs.outputFileSync(finalPath, modifiedCode, { encoding: 'utf-8' });
     compileCount += 1;
 }
 
