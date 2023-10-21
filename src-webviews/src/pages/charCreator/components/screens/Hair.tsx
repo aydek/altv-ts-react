@@ -1,7 +1,6 @@
 import React from 'react';
 import { chestHair, facialHair, hairList, MAX_HAIR_COLORS } from '../../data/hair';
 import { IHairState } from '../../data/state';
-import Divider from '../../../../components/Divider';
 import ChevronSelector from '../../../../components/ChevronSelector';
 import Slider from '../../../../components/Slider';
 import Accordion from '../../../../components/Accordion';
@@ -130,13 +129,12 @@ export const Hair = ({
 
     return (
         <>
-            <div className="font-marker text-3xl text-center">{translate('charCreator', 'hair')}</div>
-            <Divider />
-            <div className="flex items-center justify-between">
+            <div className="font-marker text-3xl text-center mb-8">{translate('charCreator', 'hair')}</div>
+
+            <div className="flex items-center justify-between mb-3">
                 <div>{translate('charCreator', 'hairstyle')}:</div>
                 <ChevronSelector width="w-44" text={hairName} onBack={changeHair(false)} onForward={changeHair(true)} />
             </div>
-            <Divider />
 
             <div className="flex items-center justify-between">
                 <div>{translate('charCreator', 'facialhair')}:</div>
@@ -147,7 +145,7 @@ export const Hair = ({
                     onForward={changeBeard(true)}
                 />
             </div>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between mb-3">
                 <div>{translate('charCreator', 'opacity')}:</div>
 
                 <Slider
@@ -161,8 +159,6 @@ export const Hair = ({
                     }}
                 />
             </div>
-
-            <Divider />
 
             <div className="flex items-center justify-between">
                 <div>{translate('charCreator', 'chesthair')}:</div>
@@ -187,7 +183,7 @@ export const Hair = ({
                     }}
                 />
             </div>
-            <Divider />
+
             <Accordion
                 title={translate('charCreator', 'haircolor')}
                 index={0}

@@ -2,7 +2,6 @@ import React from 'react';
 import { availableTops } from '../../data/tops';
 import { IClothesState } from '../../data/state';
 import ChevronSelector from '../../../../components/ChevronSelector';
-import Divider from '../../../../components/Divider';
 import { translate } from '../../../../config';
 
 export const Top = ({
@@ -110,8 +109,7 @@ export const Top = ({
 
     return (
         <>
-            <div className="font-marker text-3xl text-center">{translate('charCreator', 'top')}</div>
-            <Divider />
+            <div className="font-marker text-3xl text-center mb-8">{translate('charCreator', 'top')}</div>
 
             <div className="flex items-center justify-between">
                 <div>{translate('charCreator', 'top')}:</div>
@@ -123,7 +121,7 @@ export const Top = ({
                 />
             </div>
 
-            <div className="flex items-center justify-between mt-2">
+            <div className="flex items-center justify-between mt-1 mb-3">
                 <div>{translate('charCreator', 'color')}:</div>
                 <ChevronSelector
                     width="w-44"
@@ -133,8 +131,6 @@ export const Top = ({
                     disabled={colorDisabled}
                 />
             </div>
-
-            <Divider />
 
             <div className="flex items-center justify-between">
                 <div>{translate('charCreator', 'undershirt')}:</div>
@@ -147,7 +143,7 @@ export const Top = ({
                 />
             </div>
 
-            <div className="flex items-center justify-between mt-2">
+            <div className="flex items-center justify-between mt-1 mb-3">
                 <div>{translate('charCreator', 'color')}:</div>
                 <ChevronSelector
                     width="w-44"
@@ -157,8 +153,6 @@ export const Top = ({
                     disabled={underColorDisabled}
                 />
             </div>
-
-            <Divider />
         </>
     );
 };

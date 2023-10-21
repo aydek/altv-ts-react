@@ -8,21 +8,20 @@ import ButtonGroup from '../../../components/ButtonGroup';
 import TextField from '../../../components/Textfield';
 import { translate } from '../../../config';
 
-const menuItems: Array<
-    'dna' | 'hair' | 'eyes' | 'features' | 'appearance' | 'hat' | 'accesories' | 'top' | 'pants' | 'shoes'
-> = ['dna', 'hair', 'eyes', 'features', 'appearance', 'hat', 'accesories', 'top', 'pants', 'shoes'];
+const menuItems: Array<'dna' | 'hair' | 'eyes' | 'features' | 'appearance' | 'hat' | 'accesories' | 'top' | 'pants' | 'shoes'> = [
+    'dna',
+    'hair',
+    'eyes',
+    'features',
+    'appearance',
+    'hat',
+    'accesories',
+    'top',
+    'pants',
+    'shoes',
+];
 
-export const Mainmenu = ({
-    index,
-    setIndex,
-    sex,
-    setSex,
-}: {
-    index: number;
-    setIndex: React.Dispatch<React.SetStateAction<number>>;
-    sex: number;
-    setSex: (state: number) => void;
-}) => {
+export const Mainmenu = ({ index, setIndex, sex, setSex }: { index: number; setIndex: React.Dispatch<React.SetStateAction<number>>; sex: number; setSex: (state: number) => void }) => {
     const [dialogOpen, setDialogOpen] = useState(false);
     const [firstName, setFirstName] = useState('');
     const [firstNameHelp, setFirstNameHelp] = useState('');
@@ -113,156 +112,101 @@ export const Mainmenu = ({
     };
 
     return (
-        <Container className="absolute top-1/2 -translate-y-1/2 left-12 w-[350px] ">
-            <div className="font-marker text-[23px] font-bold text-center">{translate('charCreator', 'title')}</div>
-            <Divider />
-            <div className="flex">
-                <img className="w-[30px] object-contain" src={genderIMG}></img>
+        <div className="absolute bg-gradient-to-r from-black w-[40%] h-full flex items-center text-whitesmoke">
+            <div className="relative ml-10">
+                <div className=" text-[23px] font-bold mb-8">{translate('charCreator', 'title')}</div>
 
-                <div className="flex ml-5 w-full h-10">
-                    <div
-                        className={`rounded-l-md flex justify-center items-center cursor-pointer text w-1/2 p-3 border ${
-                            sex === 0
-                                ? 'bg-accent border-transparent hover:bg-accenthover'
-                                : 'bg-background hover:bg-backgroundhover'
-                        }`}
-                        onClick={() => setSex(0)}
-                    >
-                        {translate('charCreator', 'male')}
-                    </div>
-                    <div
-                        className={`rounded-r-md cursor-pointer flex justify-center items-center text w-1/2 p-3 border ${
-                            sex === 1
-                                ? 'bg-accent border-transparent hover:bg-accenthover'
-                                : 'bg-background hover:bg-backgroundhover'
-                        }`}
-                        onClick={() => setSex(1)}
-                    >
-                        {translate('charCreator', 'female')}
+                <div className="flex my-8">
+                    <img className="w-[30px] object-contain" src={genderIMG}></img>
+
+                    <div className="flex ml-5 w-full h-10">
+                        <div
+                            className={`rounded-l-md flex justify-center items-center cursor-pointer text w-1/2 p-3 border ${
+                                sex === 0 ? 'bg-accent border-transparent hover:bg-accenthover' : 'bg-background hover:bg-backgroundhover'
+                            }`}
+                            onClick={() => setSex(0)}
+                        >
+                            {translate('charCreator', 'male')}
+                        </div>
+                        <div
+                            className={`rounded-r-md cursor-pointer flex justify-center items-center text w-1/2 p-3 border ${
+                                sex === 1 ? 'bg-accent border-transparent hover:bg-accenthover' : 'bg-background hover:bg-backgroundhover'
+                            }`}
+                            onClick={() => setSex(1)}
+                        >
+                            {translate('charCreator', 'female')}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <Divider />
-            <div className="flex">
-                {menuItems.slice(0, 5).map((item, i) => (
-                    <Container
-                        className={`flex p-0 items-center flex-col cursor-pointer m-[3px] w-[60px] ${
-                            index === i && 'bg-accent'
-                        }`}
-                        key={i}
-                        onClick={setMenuIndex(i)}
-                    >
-                        <img
-                            className="w-[40px] h-[50px] object-contain"
-                            src={new URL(`../images/${item}.png`, import.meta.url).href}
-                        />
-                        <div className="text-[10px] mt-4 mb-1">{translate('charCreator', item)}</div>
-                    </Container>
-                ))}
-            </div>
-            <div className="flex">
-                {menuItems.slice(5).map((item, i) => (
-                    <Container
-                        className={`flex p-0 items-center flex-col cursor-pointer m-[3px] w-[60px] ${
-                            index === i + 5 && 'bg-accent'
-                        }`}
-                        key={i}
-                        onClick={setMenuIndex(i + 5)}
-                    >
-                        <img
-                            className="w-[40px] h-[50px] object-contain"
-                            src={new URL(`../images/${item}.png`, import.meta.url).href}
-                        />
-                        <div className="text-[10px] mt-4 mb-1">{translate('charCreator', item)}</div>
-                    </Container>
-                ))}
-            </div>
-            <Divider />
-            <ButtonGroup
-                onFirst={exitEditor}
-                firstText={translate('charCreator', 'back')}
-                firstIcon={<ArrowLeft className="-translate-x-5" />}
-                onSecond={dialogHandler(true)}
-                secondText={translate('charCreator', 'save')}
-                secondIcon={<Check className="translate-x-5" />}
-            />
 
-            <div className="absolute right-[-60px] top-[10px] space-y-3">
-                <Container className="w-10 h-10 flex justify-center items-center rounded-full mx-3 cursor-pointer p-1 hover:bg-backgroundhover">
-                    <Camera />
-                </Container>
-                <Container
-                    className="w-10 h-10 flex justify-center items-center rounded-full mx-3 cursor-pointer p-1 hover:bg-backgroundhover"
-                    onClick={changeCam(10)}
-                >
-                    <img className="img_white" src={new URL('../images/icons/body.png', import.meta.url).href} />
-                </Container>
-                <Container
-                    className="w-10 h-10 flex justify-center items-center rounded-full mx-3 cursor-pointer p-1 hover:bg-backgroundhover"
-                    onClick={changeCam(1)}
-                >
-                    <img className="img_white" src={new URL('../images/icons/head.png', import.meta.url).href} />
-                </Container>
-                <Container
-                    className="w-10 h-10 flex justify-center items-center rounded-full mx-3 cursor-pointer p-1 hover:bg-backgroundhover"
-                    onClick={changeCam(3)}
-                >
-                    <img className="img_white" src={new URL('../images/icons/face.png', import.meta.url).href} />
-                </Container>
-                <Container
-                    className="w-10 h-10 flex justify-center items-center rounded-full mx-3 cursor-pointer p-1 hover:bg-backgroundhover"
-                    onClick={changeCam(7)}
-                >
-                    <img className="img_white" src={new URL('../images/icons/torso.png', import.meta.url).href} />
-                </Container>
-                <Container
-                    className="w-10 h-10 flex justify-center items-center rounded-full mx-3 cursor-pointer p-1 hover:bg-backgroundhover"
-                    onClick={changeCam(8)}
-                >
-                    <img className="img_white" src={new URL('../images/icons/legs.png', import.meta.url).href} />
-                </Container>
-            </div>
-            <Dialog
-                isOpen={dialogOpen}
-                title={translate('charCreator', 'title')}
-                onClose={dialogHandler(false)}
-                onEnter={saveCharacter}
-            >
-                <TextField
-                    label={translate('charCreator', 'firstname')}
-                    type="text"
-                    value={firstName}
-                    onChange={firstnameChange}
-                    error={firstNameHelp.length > 0}
-                    helperText={firstNameHelp}
-                    autoFocus={true}
-                />
-                <TextField
-                    label={translate('charCreator', 'lastname')}
-                    type="text"
-                    value={lastName}
-                    onChange={lastNameChange}
-                    error={lastNameHelp.length > 0}
-                    helperText={lastNameHelp}
-                />
-                <TextField
-                    label={translate('charCreator', 'age')}
-                    type="text"
-                    value={age}
-                    onChange={ageChange}
-                    error={ageHelp.length > 0}
-                    helperText={ageHelp}
-                />
-
+                <div className="flex">
+                    {menuItems.slice(0, 5).map((item, i) => (
+                        <Container className={`flex p-0 items-center flex-col cursor-pointer m-[3px] w-[60px] ${index === i && 'bg-accent'}`} key={i} onClick={setMenuIndex(i)}>
+                            <img className="w-[40px] h-[50px] object-contain" src={new URL(`../images/${item}.png`, import.meta.url).href} />
+                            <div className="text-[10px] mt-4 mb-1">{translate('charCreator', item)}</div>
+                        </Container>
+                    ))}
+                </div>
+                <div className="flex mb-8">
+                    {menuItems.slice(5).map((item, i) => (
+                        <Container className={`flex p-0 items-center flex-col cursor-pointer m-[3px] w-[60px] ${index === i + 5 && 'bg-accent'}`} key={i} onClick={setMenuIndex(i + 5)}>
+                            <img className="w-[40px] h-[50px] object-contain" src={new URL(`../images/${item}.png`, import.meta.url).href} />
+                            <div className="text-[10px] mt-4 mb-1">{translate('charCreator', item)}</div>
+                        </Container>
+                    ))}
+                </div>
                 <ButtonGroup
-                    onFirst={dialogHandler(false)}
-                    firstText={translate('charCreator', 'cancel')}
+                    onFirst={exitEditor}
+                    firstText={translate('charCreator', 'back')}
                     firstIcon={<ArrowLeft className="-translate-x-5" />}
-                    onSecond={saveCharacter}
+                    onSecond={dialogHandler(true)}
                     secondText={translate('charCreator', 'save')}
                     secondIcon={<Check className="translate-x-5" />}
                 />
-            </Dialog>
-        </Container>
+
+                <div className="absolute right-[-80px] top-16 space-y-3">
+                    <Container className="w-10 h-10 flex justify-center items-center rounded-full mx-3 cursor-pointer p-1 hover:bg-backgroundhover">
+                        <Camera />
+                    </Container>
+                    <Container className="w-10 h-10 flex justify-center items-center rounded-full mx-3 cursor-pointer p-1 hover:bg-backgroundhover" onClick={changeCam(10)}>
+                        <img className="img_white" src={new URL('../images/icons/body.png', import.meta.url).href} />
+                    </Container>
+                    <Container className="w-10 h-10 flex justify-center items-center rounded-full mx-3 cursor-pointer p-1 hover:bg-backgroundhover" onClick={changeCam(1)}>
+                        <img className="img_white" src={new URL('../images/icons/head.png', import.meta.url).href} />
+                    </Container>
+                    <Container className="w-10 h-10 flex justify-center items-center rounded-full mx-3 cursor-pointer p-1 hover:bg-backgroundhover" onClick={changeCam(3)}>
+                        <img className="img_white" src={new URL('../images/icons/face.png', import.meta.url).href} />
+                    </Container>
+                    <Container className="w-10 h-10 flex justify-center items-center rounded-full mx-3 cursor-pointer p-1 hover:bg-backgroundhover" onClick={changeCam(7)}>
+                        <img className="img_white" src={new URL('../images/icons/torso.png', import.meta.url).href} />
+                    </Container>
+                    <Container className="w-10 h-10 flex justify-center items-center rounded-full mx-3 cursor-pointer p-1 hover:bg-backgroundhover" onClick={changeCam(8)}>
+                        <img className="img_white" src={new URL('../images/icons/legs.png', import.meta.url).href} />
+                    </Container>
+                </div>
+                <Dialog isOpen={dialogOpen} title={translate('charCreator', 'title')} onClose={dialogHandler(false)} onEnter={saveCharacter}>
+                    <TextField
+                        label={translate('charCreator', 'firstname')}
+                        type="text"
+                        value={firstName}
+                        onChange={firstnameChange}
+                        error={firstNameHelp.length > 0}
+                        helperText={firstNameHelp}
+                        autoFocus={true}
+                    />
+                    <TextField label={translate('charCreator', 'lastname')} type="text" value={lastName} onChange={lastNameChange} error={lastNameHelp.length > 0} helperText={lastNameHelp} />
+                    <TextField label={translate('charCreator', 'age')} type="text" value={age} onChange={ageChange} error={ageHelp.length > 0} helperText={ageHelp} />
+
+                    <ButtonGroup
+                        onFirst={dialogHandler(false)}
+                        firstText={translate('charCreator', 'cancel')}
+                        firstIcon={<ArrowLeft className="-translate-x-5" />}
+                        onSecond={saveCharacter}
+                        secondText={translate('charCreator', 'save')}
+                        secondIcon={<Check className="translate-x-5" />}
+                    />
+                </Dialog>
+            </div>
+        </div>
     );
 };

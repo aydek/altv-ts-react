@@ -3,7 +3,6 @@ import { appearanceItemNames, appearanceNames } from '../../data/appearance';
 import { MAX_HAIR_COLORS } from '../../data/hair';
 import { IAppearanceState } from '../../data/state';
 import ButtonGroup from '../../../../components/ButtonGroup';
-import Divider from '../../../../components/Divider';
 import { IconClose, IconShuffle } from '../../../../components/SVG';
 import ChevronSelector from '../../../../components/ChevronSelector';
 import Slider from '../../../../components/Slider';
@@ -70,8 +69,7 @@ export const Appearance = ({
 
     return (
         <>
-            <div className="font-marker text-3xl text-center">{translate('charCreator', 'appearance')}</div>
-            <Divider />
+            <div className="font-marker text-3xl text-center mb-8">{translate('charCreator', 'appearance')}</div>
             <AppearanceContent
                 handleChange={handleChange}
                 opacityChange={opacityChange}
@@ -104,7 +102,7 @@ function AppearanceContent(props: IAppearanceContent) {
         const name = appearanceItemNames[i][state.appearanceValue[i].index];
         if (appearanceNames[i] === 'Skip') continue;
         indents.push(
-            <div key={i}>
+            <div className="mb-3" key={i}>
                 <div className="flex items-center justify-between">
                     <div>{appearanceNames[i]}:</div>
                     <ChevronSelector
@@ -143,7 +141,6 @@ function AppearanceContent(props: IAppearanceContent) {
                 ) : (
                     <></>
                 )}
-                <Divider />
             </div>
         );
     }

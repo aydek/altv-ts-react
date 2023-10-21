@@ -3,7 +3,6 @@ import { eyeBrows, eyeColors } from '../../data/eyes';
 import { MAX_HAIR_COLORS } from '../../data/hair';
 import { IEyesState } from '../../data/state';
 import ChevronSelector from '../../../../components/ChevronSelector';
-import Divider from '../../../../components/Divider';
 import Slider from '../../../../components/Slider';
 import ButtonGroup from '../../../../components/ButtonGroup';
 import { IconClose, IconShuffle } from '../../../../components/SVG';
@@ -81,19 +80,18 @@ export const Eyes = ({
 
     return (
         <>
-            <div className="font-marker text-3xl text-center">{translate('charCreator', 'eyes')}</div>
-            <Divider />
-            <div className="flex items-center justify-between">
+            <div className="font-marker text-3xl text-center mb-8">{translate('charCreator', 'eyes')}</div>
+
+            <div className="flex items-center justify-between mb-3">
                 <div>{translate('charCreator', 'eyecolor')}:</div>
                 <ChevronSelector width="w-44" text={eyeColorName} onBack={eyesPrev} onForward={eyesNext} />
             </div>
-            <Divider />
 
             <div className="flex items-center justify-between">
                 <div>{translate('charCreator', 'eyebrows')}:</div>
                 <ChevronSelector width="w-44" text={eyebrowsName} onBack={eyebrowsPrev} onForward={eyebrowsNext} />
             </div>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between mb-3">
                 <div>{translate('charCreator', 'opacity')}:</div>
 
                 <Slider
@@ -108,10 +106,8 @@ export const Eyes = ({
                 />
             </div>
 
-            <Divider />
             <div>{translate('charCreator', 'eyebrowscolor')}:</div>
             <HairColors colorChange={colorChange} />
-            <Divider />
 
             <ButtonGroup
                 onFirst={reset}

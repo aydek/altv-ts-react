@@ -2,7 +2,6 @@ import React from 'react';
 import { availableHats } from '../../data/hat';
 import { IClothesState } from '../../data/state';
 import ChevronSelector from '../../../../components/ChevronSelector';
-import Divider from '../../../../components/Divider';
 import { translate } from '../../../../config';
 
 export const Hat = ({
@@ -54,8 +53,7 @@ export const Hat = ({
 
     return (
         <>
-            <div className="font-marker text-3xl text-center">{translate('charCreator', 'hat')}</div>
-            <Divider />
+            <div className="font-marker text-3xl text-center mb-8">{translate('charCreator', 'hat')}</div>
 
             <div className="flex items-center justify-between">
                 <div>{translate('charCreator', 'hat')}:</div>
@@ -77,8 +75,6 @@ export const Hat = ({
                     disabled={colorDisabled}
                 />
             </div>
-
-            <Divider />
         </>
     );
 };

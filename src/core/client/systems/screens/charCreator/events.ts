@@ -5,7 +5,7 @@ import { getCreatorOpen, setCreatorOpen } from './functions';
 import { CCreatorEvents, CSelectionEvents } from '../../../../shared/enums/events/webviewEvents';
 import { CREATOR_HEADING, LOGIN_CORDS, LOGIN_HEADING } from '../../../../shared/config';
 import { getFronOfPoint } from '../../../../shared/utility/vector';
-import { IAppearanceState, IClothesState, IEyesState, IFeaturesState, IHairState } from './interfaces';
+import { IAppearanceState, IClothesState, IEyesState, IFeaturesState, IHairState, IParentState } from './interfaces';
 import { PROPS_MALE_HATS } from '../../../../shared/constants/clothing/props_male_hats';
 import { PROPS_FEMALE_HATS } from '../../../../shared/constants/clothing/props_female_hats';
 import { PROPS_MALE_GLASSES } from '../../../../shared/constants/clothing/props_male_glasses';
@@ -101,69 +101,41 @@ function handleChangeCam(id: number) {
     switch (id) {
         case 0: {
             const endPos = getFronOfPoint(pPos, 2, initialHeading);
-            LOGIN_CAM.interpolate(
-                new alt.Vector3(endPos.x, endPos.y, endPos.z),
-                new alt.Vector3(pPos.x, pPos.y, pPos.z),
-                1000
-            );
+            LOGIN_CAM.interpolate(new alt.Vector3(endPos.x, endPos.y, endPos.z), new alt.Vector3(pPos.x, pPos.y, pPos.z), 1000);
             break;
         }
         case 6:
         case 7: {
             const endPos = getFronOfPoint(pPos, 1, initialHeading);
-            LOGIN_CAM.interpolate(
-                new alt.Vector3(endPos.x, endPos.y, endPos.z + 0.2),
-                new alt.Vector3(pPos.x, pPos.y, pPos.z + 0.1),
-                1000
-            );
+            LOGIN_CAM.interpolate(new alt.Vector3(endPos.x, endPos.y, endPos.z + 0.2), new alt.Vector3(pPos.x, pPos.y, pPos.z + 0.1), 1000);
             break;
         }
         case 1:
         case 5: {
             const endPos = getFronOfPoint(pPos, 1, initialHeading);
-            LOGIN_CAM.interpolate(
-                new alt.Vector3(endPos.x, endPos.y, endPos.z + 0.55),
-                new alt.Vector3(pPos.x, pPos.y, pPos.z + 0.5),
-                1000
-            );
+            LOGIN_CAM.interpolate(new alt.Vector3(endPos.x, endPos.y, endPos.z + 0.55), new alt.Vector3(pPos.x, pPos.y, pPos.z + 0.5), 1000);
             break;
         }
         case 2:
         case 3:
         case 4: {
             const endPos = getFronOfPoint(pPos, 0.5, initialHeading);
-            LOGIN_CAM.interpolate(
-                new alt.Vector3(endPos.x, endPos.y, endPos.z + 0.55),
-                new alt.Vector3(pPos.x, pPos.y, pPos.z + 0.5),
-                1000
-            );
+            LOGIN_CAM.interpolate(new alt.Vector3(endPos.x, endPos.y, endPos.z + 0.55), new alt.Vector3(pPos.x, pPos.y, pPos.z + 0.5), 1000);
             break;
         }
         case 8: {
             const endPos = getFronOfPoint(pPos, 1.3, initialHeading);
-            LOGIN_CAM.interpolate(
-                new alt.Vector3(endPos.x, endPos.y, endPos.z - 0.5),
-                new alt.Vector3(pPos.x, pPos.y, pPos.z - 0.5),
-                1000
-            );
+            LOGIN_CAM.interpolate(new alt.Vector3(endPos.x, endPos.y, endPos.z - 0.5), new alt.Vector3(pPos.x, pPos.y, pPos.z - 0.5), 1000);
             break;
         }
         case 9: {
             const endPos = getFronOfPoint(pPos, 1, initialHeading);
-            LOGIN_CAM.interpolate(
-                new alt.Vector3(endPos.x, endPos.y, endPos.z - 0.9),
-                new alt.Vector3(pPos.x, pPos.y, pPos.z - 0.9),
-                1000
-            );
+            LOGIN_CAM.interpolate(new alt.Vector3(endPos.x, endPos.y, endPos.z - 0.9), new alt.Vector3(pPos.x, pPos.y, pPos.z - 0.9), 1000);
             break;
         }
         case 10: {
             const endPos = getFronOfPoint(pPos, 2.5, initialHeading);
-            LOGIN_CAM.interpolate(
-                new alt.Vector3(endPos.x, endPos.y, endPos.z),
-                new alt.Vector3(pPos.x, pPos.y, pPos.z),
-                1000
-            );
+            LOGIN_CAM.interpolate(new alt.Vector3(endPos.x, endPos.y, endPos.z), new alt.Vector3(pPos.x, pPos.y, pPos.z), 1000);
             break;
         }
     }
@@ -202,23 +174,10 @@ async function handleUpdateData(dataType: string, sex: number, values: string) {
         native.doScreenFadeIn(500);
     }
 
-    const data = JSON.parse(values);
-
     await alt.Utils.wait(timeout);
     if (dataType === 'parentData') {
-        native.setPedHeadBlendData(
-            player,
-            data.motherID,
-            data.fatherID,
-            0,
-            data.motherID,
-            data.fatherID,
-            0,
-            data.resemblance / 100,
-            data.skintone / 100,
-            0,
-            false
-        );
+        const data: IParentState = JSON.parse(values);
+        native.setPedHeadBlendData(player, data.motherID, data.fatherID, 0, data.motherID, data.fatherID, 0, data.resemblance / 100, data.skintone / 100, 0, false);
         parentData = data;
         return;
     }
@@ -404,10 +363,7 @@ function updateClothes(sex: number, values: string) {
         const topProps = sex === 0 ? MALE_TOPS : FEMALE_TOPS;
         const topKey = data.tops[1].toString();
         Object.keys(topProps[topKey as keyof typeof topProps]).forEach((v, index) => {
-            if (
-                topProps[topKey as keyof typeof topProps][v as keyof (typeof topProps)[keyof typeof topProps]].GXT !==
-                'NO_LABEL'
-            ) {
+            if (topProps[topKey as keyof typeof topProps][v as keyof (typeof topProps)[keyof typeof topProps]].GXT !== 'NO_LABEL') {
                 colors.push(index);
             }
         });
@@ -415,30 +371,16 @@ function updateClothes(sex: number, values: string) {
         const underProps = sex === 0 ? MALE_UNDERSHIRTS : FEMALE_UNDERSHIRTS;
         const underKey = data.tops[1].toString();
         Object.keys(underProps[underKey as keyof typeof underProps]).forEach((v, index) => {
-            if (
-                underProps[underKey as keyof typeof underProps][v as keyof (typeof underProps)[keyof typeof underProps]]
-                    .GXT !== 'NO_LABEL'
-            ) {
+            if (underProps[underKey as keyof typeof underProps][v as keyof (typeof underProps)[keyof typeof underProps]].GXT !== 'NO_LABEL') {
                 undershirtcolors.push(index);
             }
         });
 
         if (colors.length < 1) colors = [0];
         if (undershirtcolors.length < 1) undershirtcolors = [0];
-        systems.player.appearance.setTop(
-            data.tops[1],
-            colors[data.tops[2]] as number,
-            data.tops[4],
-            undershirtcolors[data.tops[6]] as number
-        );
+        systems.player.appearance.setTop(data.tops[1], colors[data.tops[2]] as number, data.tops[4], undershirtcolors[data.tops[6]] as number);
 
-        equipment.tops = [
-            data.tops[1],
-            colors[data.tops[2]] as number,
-            data.tops[4],
-            undershirtcolors[data.tops[6]] as number,
-            'Default',
-        ];
+        equipment.tops = [data.tops[1], colors[data.tops[2]] as number, data.tops[4], undershirtcolors[data.tops[6]] as number, 'Default'];
 
         response.tops[3] = colors;
         response.tops[5] = undershirts.length;

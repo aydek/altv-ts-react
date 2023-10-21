@@ -3,7 +3,6 @@ import { featureNames } from '../../data/features';
 import { IFeaturesState } from '../../data/state';
 import ButtonGroup from '../../../../components/ButtonGroup';
 import { IconClose, IconShuffle } from '../../../../components/SVG';
-import Divider from '../../../../components/Divider';
 import Slider from '../../../../components/Slider';
 import { translate } from '../../../../config';
 
@@ -38,10 +37,10 @@ export const Features = ({
 
     return (
         <>
-            <div className="font-marker text-3xl text-center">{translate('charCreator', 'features')}</div>
-            <Divider />
+            <div className="font-marker text-3xl text-center mb-8">{translate('charCreator', 'features')}</div>
+
             <FeaturesFetch handleChange={handleChange} value={data.featureValue} />
-            <Divider />
+
             <ButtonGroup
                 onFirst={reset}
                 firstText={translate('charCreator', 'reset')}

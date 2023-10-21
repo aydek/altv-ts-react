@@ -2,7 +2,6 @@ import React from 'react';
 import { availableBracelets, availableEars, availableGlasses, availableWatches } from '../../data/accesories';
 import { IClothesState } from '../../data/state';
 import ChevronSelector from '../../../../components/ChevronSelector';
-import Divider from '../../../../components/Divider';
 import { translate } from '../../../../config';
 
 export const Accesories = ({
@@ -168,8 +167,7 @@ export const Accesories = ({
 
     return (
         <>
-            <div className="font-marker text-3xl text-center">{translate('charCreator', 'accesories')}</div>
-            <Divider />
+            <div className="font-marker text-3xl text-center mb-8">{translate('charCreator', 'accesories')}</div>
 
             <div className="flex items-center justify-between">
                 <div>{translate('charCreator', 'glasses')}:</div>
@@ -181,7 +179,7 @@ export const Accesories = ({
                 />
             </div>
 
-            <div className="flex items-center justify-between mt-2">
+            <div className="flex items-center justify-between mt-1 mb-3">
                 <div>{translate('charCreator', 'color')}:</div>
                 <ChevronSelector
                     width="w-44"
@@ -191,7 +189,6 @@ export const Accesories = ({
                     disabled={glassesColorDisabled}
                 />
             </div>
-            <Divider />
 
             <div className="flex items-center justify-between">
                 <div>{translate('charCreator', 'watches')}:</div>
@@ -203,7 +200,7 @@ export const Accesories = ({
                 />
             </div>
 
-            <div className="flex items-center justify-between mt-2">
+            <div className="flex items-center justify-between mt-1 mb-3">
                 <div>{translate('charCreator', 'color')}:</div>
                 <ChevronSelector
                     width="w-44"
@@ -213,8 +210,6 @@ export const Accesories = ({
                     disabled={watchesColorDisabled}
                 />
             </div>
-
-            <Divider />
 
             <div className="flex items-center justify-between">
                 <div>{translate('charCreator', 'ears')}:</div>
@@ -226,7 +221,7 @@ export const Accesories = ({
                 />
             </div>
 
-            <div className="flex items-center justify-between mt-2">
+            <div className="flex items-center justify-between mt-1 mb-3">
                 <div>{translate('charCreator', 'color')}:</div>
                 <ChevronSelector
                     width="w-44"
@@ -236,8 +231,6 @@ export const Accesories = ({
                     disabled={earsColorDisabled}
                 />
             </div>
-
-            <Divider />
 
             <div className="flex items-center justify-between">
                 <div>{translate('charCreator', 'bracelets')}:</div>
@@ -249,7 +242,7 @@ export const Accesories = ({
                 />
             </div>
 
-            <div className="flex items-center justify-between mt-2">
+            <div className="flex items-center justify-between mt-1 mb-3">
                 <div>{translate('charCreator', 'color')}:</div>
                 <ChevronSelector
                     width="w-44"
@@ -259,8 +252,6 @@ export const Accesories = ({
                     disabled={braceletsColorDisabled}
                 />
             </div>
-
-            <Divider />
         </>
     );
 };

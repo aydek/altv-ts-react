@@ -74,8 +74,7 @@ export const Parents = ({
 
     return (
         <div>
-            <div className="font-marker text-3xl text-center">{translate('charCreator', 'dna')}</div>
-            <Divider />
+            <div className="font-marker text-3xl text-center mb-8">{translate('charCreator', 'dna')}</div>
 
             <div className="relative">
                 <img className="rounded-md" src={new URL('../../images/mumdadbg.png', import.meta.url).href}></img>
@@ -133,7 +132,7 @@ export const Parents = ({
                     }}
                 />
             </div>
-            <Divider />
+
             <ButtonGroup
                 onFirst={resetParents}
                 firstText={translate('charCreator', 'reset')}

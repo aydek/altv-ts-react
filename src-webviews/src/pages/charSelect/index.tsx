@@ -1,52 +1,58 @@
 import { useEffect, useState } from 'react';
-import Container from '../../components/Container';
-import LoadingSpinner from '../../components/Spinner';
-import Divider from '../../components/Divider';
 import Button from '../../components/Button';
-import Alert from '../../components/Alerts';
-import { AccountPlus, ArrowRight, Eye } from '../../components/SVG';
+import { Account, AccountPlus, ArrowRight, Eye, TrashCanIcon } from '../../components/SVG';
+import { translate } from '../../config';
+import { twMerge } from 'tailwind-merge';
 
 import './style.css';
-import { translate } from '../../config';
 
 const CharSelect = () => {
     const [loading, setLoading] = useState('alt' in window);
-    const [characters, setCharacters] = useState<any[]>(
+    const [index, setIndex] = useState(0);
+    const [hover, setHover] = useState([false, false, false, false, false, false]);
+    const [characters, setCharacters] = useState(
         'alt' in window
             ? []
             : [
-                  { rpName: 'Jonas Valanciunas', cash: '299', job: 'someJob', updated_at: '2021:21:21' },
-                  { rpName: 'Jonas Valanciunas', cash: '299', job: 'someJob', updated_at: '2021:21:21' },
+                  { _id: '232323', rpName: 'Jonas Valanciunas', cash: '299', job: 'someJob', updated_at: '2021:21:21' },
+                  { _id: '3223', rpName: 'Jonas Valanciunas', cash: '299', job: 'someJob', updated_at: '2021:21:21' },
               ]
     );
-    const [charactersAllowed, setCharactersAllowed] = useState(20);
-    const [error, setError] = useState(false);
 
-    const viewChar = (id: string) => () => {
+    const viewCharacter = (i: number) => {
+        if (i === index) return;
+        setIndex(i);
         if ('alt' in window) {
-            alt.emit('Webview:Character:Selection:View', id);
+            alt.emit('Webview:Character:Selection:View', characters[i]._id);
         }
     };
 
-    const playChar = (id: string) => () => {
+    const playCharacter = (i: number) => {
         if ('alt' in window) {
-            alt.emit('Webview:Character:Selection:Play', id);
+            alt.emit('Webview:Character:Selection:Play', characters[i]._id);
         }
     };
 
-    const createNew = () => {
-        if (characters.length >= charactersAllowed) {
-            setError(true);
-            return;
-        }
+    const deleteCharacter = (i: number) => {
+        if ('alt' in window) alt.emit('char-select-delete', characters[i]._id);
+    };
+
+    const createNewCharacter = () => {
+        if (characters.length >= 6) return;
         if ('alt' in window) {
             alt.emit('Webview:Character:Selection:Create');
         }
     };
 
-    const fetchData = (data: string, charactersAllowed: number) => {
+    const toggleHover = (i: number, state: boolean) => {
+        setHover((prev) => {
+            prev[i] = state;
+            return [...prev];
+        });
+    };
+
+    const fetchData = (data: string) => {
         setCharacters(JSON.parse(data));
-        setCharactersAllowed(charactersAllowed);
         setLoading(false);
     };
 
@@ -67,72 +73,75 @@ const CharSelect = () => {
         };
     }, []);
 
-    return (
-        <Container className="w-[350px] absolute top-1/2 left-8 transform -translate-y-1/2 select-none text-whitesmoke">
-            <p className="font-marker text-2xl font-bold m-0 relative">{translate('charSelect', 'title')}</p>
-            <Divider />
-            <div className="max-h-[500px] overflow-y-scroll p-2 overflow-x-hidden">
-                {loading ? (
-                    <div className="flex justify-center m-8">
-                        <LoadingSpinner />
-                    </div>
-                ) : characters.length < 1 ? (
-                    <div className="m-5">{translate('charSelect', 'notFound')}</div>
-                ) : (
-                    characters.map((character: any, index: number) => (
-                        <div key={index}>
-                            <div className="flex">
-                                <div className="w-[40%] ">
-                                    <div className="w-full text-center font-bold">{character.rpName}</div>
-                                    <div className="w-full flex justify-end relative mt-2">
-                                        <Eye
-                                            className="hover:fill-whitesmokehover cursor-pointer -left-[4px] -top-[5px] absolute"
-                                            onClick={viewChar(character._id)}
-                                            size={45}
-                                        />
-                                        <Button
-                                            onClick={playChar(character._id)}
-                                            className=" text-sm  p-1 pl-3 right-0 w-3/4"
-                                        >
-                                            <div className="translate-x-3 flex items-center">
-                                                {translate('charSelect', 'play')}
-                                                <ArrowRight className="translate-x-2" />
-                                            </div>
-                                        </Button>
-                                    </div>
-                                </div>
-
-                                <div className="text-right text-sm flex flex-col justify-center ml-auto">
-                                    <div>
-                                        <span>{translate('charSelect', 'cash')}: </span>
-                                        <span className="text-[#607d8b] font-bold">
-                                            {character.cash} {'$'}
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span>{translate('charSelect', 'lastPlayed')}: </span>
-                                        <span className="text-[#607d8b] font-bold">
-                                            {character.updated_at.slice(0, character.updated_at.indexOf('T'))}
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span>{translate('charSelect', 'job')}: </span>
-                                        <span className="text-[#607d8b] font-bold">{character.job}</span>
-                                    </div>
-                                </div>
+    return !loading ? (
+        <div className="w-[50%] h-screen bg-gradient-to-r from-black text-whitesmoke flex  justify-center flex-col select-none">
+            <div className="w-64 flex flex-col ml-[10%]">
+                <div className="text-3xl font-bold mb-12 text-whitesmoke">{translate('charSelect', 'title')}</div>
+                {characters.length > 0 ? (
+                    <>
+                        <div className="flex flex-col text-xl font-bold">
+                            <div>{characters[index].rpName.split(' ')[0]}</div>
+                            <div>{characters[index].rpName.split(' ')[1]}</div>
+                            <div className="flex mt-1">
+                                <div className="text-gray text-sm ">{translate('charSelect', 'cash')}:</div>
+                                <div className="text-sm text-accent ml-1">{characters[index].cash} $</div>
                             </div>
-                            {characters.length - 1 > index && <Divider />}
+                            <div className="flex mt-1">
+                                <div className="text-gray text-sm ">{translate('charSelect', 'job')}:</div>
+                                <div className="text-sm text-accent ml-1">{characters[index].job}</div>
+                            </div>
+                            <div className="flex mt-1">
+                                <div className="text-gray text-sm ">{translate('charSelect', 'lastPlayed')}:</div>
+                                <div className="text-sm text-accent ml-1">{characters[index].updated_at.slice(0, 10)}</div>
+                            </div>
                         </div>
-                    ))
+                        <div className="mt-10 w-full flex flex-col space-y-2">
+                            <Button onClick={() => playCharacter(index)}>
+                                <div className="flex justify-center space-x-2">
+                                    <div>{translate('charSelect', 'play')}</div>
+                                    <ArrowRight />
+                                </div>
+                            </Button>
+                            <Button onClick={() => deleteCharacter(index)} className="bg-background border-gray hover:bg-backgroundhover">
+                                <div className="flex justify-center space-x-2">
+                                    <TrashCanIcon />
+                                    <div>{translate('charSelect', 'delete')}</div>
+                                </div>
+                            </Button>
+                        </div>
+                    </>
+                ) : (
+                    <div className="text-xl font-bold">{translate('charSelect', 'notFound')}</div>
+                )}
+                <div className="mt-20 grid grid-cols-3 gap-2">
+                    {[...Array(6)].map((item, i) => (
+                        <div key={i} className={twMerge(' w-20 h-20  border rounded-lg', index === i && characters.length > 0 && 'bg-accent')}>
+                            {characters[i] ? (
+                                <div
+                                    className="h-full cursor-pointer grid place-items-center"
+                                    onClick={() => viewCharacter(i)}
+                                    onMouseEnter={() => toggleHover(i, true)}
+                                    onMouseLeave={() => toggleHover(i, false)}
+                                >
+                                    {hover[i] ? <Eye className="w-12 h-12" /> : <Account className=" w-12 h-12" />}
+                                </div>
+                            ) : (
+                                <div className="h-full  grid place-items-center">
+                                    <AccountPlus className="w-12 h-12 fill-gray " />
+                                </div>
+                            )}
+                        </div>
+                    ))}
+                </div>
+                {characters.length < 6 && (
+                    <Button className="mt-4 bg-darkgray" onClick={createNewCharacter}>
+                        {translate('charSelect', 'createnew')}
+                    </Button>
                 )}
             </div>
-            <Divider />
-            <Button className="flex items-center" onClick={createNew} disabled={loading}>
-                <AccountPlus />
-                <div>{translate('charSelect', 'createnew')}</div>
-            </Button>
-            {error && <Alert message={translate('charSelect', 'error_limit')} type="error" />}
-        </Container>
+        </div>
+    ) : (
+        <></>
     );
 };
 

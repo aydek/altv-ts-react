@@ -62,7 +62,7 @@ export const locales = {
 
         Vehicle: {
             en: 'Vehicle',
-            lt: 'Mašina',
+            lt: 'Maťina',
         },
 
         Glovebox: {
@@ -99,6 +99,10 @@ export const locales = {
         job: {
             en: 'Job',
             lt: 'Darbas',
+        },
+        delete: {
+            en: 'Delete',
+            lt: 'Pašalinti',
         },
         createnew: {
             en: 'Create new',
@@ -137,7 +141,7 @@ export const locales = {
         },
         save: {
             en: 'Save',
-            lt: 'Išsaugoti',
+            lt: 'Iťsaugoti',
         },
         male: {
             en: 'Male',
@@ -165,7 +169,7 @@ export const locales = {
         },
         appearance: {
             en: 'Appearance',
-            lt: 'Išvaizda',
+            lt: 'Iťvaizda',
         },
         hat: {
             en: 'Hat',
@@ -177,7 +181,7 @@ export const locales = {
         },
         top: {
             en: 'Top',
-            lt: 'Viršus',
+            lt: 'Virťus',
         },
         pants: {
             en: 'Legs',
@@ -197,7 +201,7 @@ export const locales = {
         },
         resemblance: {
             en: 'Resemblance',
-            lt: 'Panašumas',
+            lt: 'Panaťumas',
         },
         skintone: {
             en: 'Skintone',
@@ -303,7 +307,7 @@ export const locales = {
         },
         undershirt: {
             en: 'Undershirt',
-            lt: 'Maškinėliai',
+            lt: 'Maťkinėliai',
         },
         turn_left: {
             en: 'Turn left',
@@ -311,7 +315,7 @@ export const locales = {
         },
         turn_right: {
             en: 'Turn right',
-            lt: 'Pasukti į dešinę',
+            lt: 'Pasukti į deťinę',
         },
     },
 };

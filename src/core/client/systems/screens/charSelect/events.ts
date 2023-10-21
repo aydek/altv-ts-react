@@ -14,6 +14,8 @@ webview.on(CSelectionEvents.play, handlePlay);
 alt.onServer(CSelectionEvents.play, handlePlay);
 alt.onServer(CSelectionEvents.fetch, handleServerFetch);
 
+alt.onServer('wtf', (arg) => console.log(`wtf: ${arg}`));
+
 async function handleView(id: string) {
     alt.emitServer(CSelectionEvents.view, id);
     native.setEntityHeading(player, 267.0);
@@ -54,7 +56,6 @@ async function handlePlay(id: string) {
     alt.emit(DefaultEvents.playerSpawn);
 }
 
-function handleServerFetch(data: string, charactersAllowed: number) {
-
-    webview.emit(CSelectionEvents.fetch, data, charactersAllowed);
+function handleServerFetch(data: string) {
+    webview.emit(CSelectionEvents.fetch, data);
 }

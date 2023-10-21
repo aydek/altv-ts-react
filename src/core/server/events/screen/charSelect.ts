@@ -1,6 +1,5 @@
 import * as alt from 'alt-server';
 import { Character } from '../../database/models/characters';
-import { Account } from '../../database/models/accounts';
 import { systems } from '../../systems/systems';
 import { CSelectionEvents } from '@shared/enums/events/webviewEvents';
 import { JOBS_INFO } from '@shared/constants/jobs';
@@ -17,8 +16,6 @@ function handlePlay(player: alt.Player, id: string) {
 
 async function fetchCharactersData(player: alt.Player) {
     const doc = await Character.find({ owner: player.discord_id });
-    const accdoc = await Account.findOne({ discordID: player.discord_id });
-    if (accdoc === null) return;
 
     let result = [];
     for (let i = 0; i < doc.length; i++) {
@@ -34,8 +31,8 @@ async function fetchCharactersData(player: alt.Player) {
             updated_at: targetDoc.updated_at,
         });
     }
-
-    alt.emitClient(player, CSelectionEvents.fetch, JSON.stringify(result), accdoc.charactersAllowed);
+    alt.emitClient(player, CSelectionEvents.fetch, JSON.stringify(result));
+    
 }
 
 async function handleView(player: alt.Player, id: string) {

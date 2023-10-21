@@ -2,7 +2,6 @@ import React from 'react';
 import { availablePants } from '../../data/pants';
 import { IClothesState } from '../../data/state';
 import ChevronSelector from '../../../../components/ChevronSelector';
-import Divider from '../../../../components/Divider';
 import { translate } from '../../../../config';
 
 export const Legs = ({
@@ -54,8 +53,7 @@ export const Legs = ({
 
     return (
         <>
-            <div className="font-marker text-3xl text-center">{translate('charCreator', 'pants')}</div>
-            <Divider />
+            <div className="font-marker text-3xl text-center mb-8">{translate('charCreator', 'pants')}</div>
 
             <div className="flex items-center justify-between">
                 <div>{translate('charCreator', 'pants')}:</div>
@@ -77,8 +75,6 @@ export const Legs = ({
                     disabled={colorDisabled}
                 />
             </div>
-
-            <Divider />
         </>
     );
 };
