@@ -1,3 +1,3 @@
 type LangKey = 'en' | 'lt';
 
-export const LANG: LangKey = 'en';
+export const LANG: LangKey = 'lt';
